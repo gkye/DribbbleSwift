@@ -31,7 +31,6 @@ class HTTPRequest{
         }
         params["access_token"] = access_token
         
-        print(params)
         let parameterString = params.stringFromHttpParameters()
         url = NSURL(string: "\(baseURL)?\(parameterString)")!
         
