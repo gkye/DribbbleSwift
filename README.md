@@ -9,7 +9,9 @@ https://dribbble.com/account/applications/new
 * import DribbbleSwift
 
 ###Cocoapods
-* coming soon
+```ruby
+pod 'DribbbleSwift'
+```
 
 #Endpoints
 - [Buckets :pouch: ](#buckets-pouch)
