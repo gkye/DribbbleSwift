@@ -38,7 +38,7 @@ public class ImagesDS{
  Limit the results to a specific type with the following possible values
  */
 public enum ShotListDS: String{
-    case animated, attachments, debuts, playoffs, rebounds, teams
+    case animated, attachments, debuts, playoffs, rebounds, teams, any
 }
 
 /**

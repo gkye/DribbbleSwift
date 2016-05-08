@@ -27,14 +27,14 @@
 
 /* Begin PBXFileReference section */
 		5E8A33A31CDD8DBD0075587B /* DribbbleSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DribbbleSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E8A33A61CDD8DBE0075587B /* DribbbleSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DribbbleSwift.h; sourceTree = "<group>"; };
+		5E8A33A61CDD8DBE0075587B /* DribbbleSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DribbbleSwift.h; path = Source/DribbbleSwift.h; sourceTree = SOURCE_ROOT; };
 		5E8A33A81CDD8DBE0075587B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E8A33AD1CDD8DBE0075587B /* DribbbleSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DribbbleSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E8A33B21CDD8DBE0075587B /* DribbbleSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DribbbleSwiftTests.swift; sourceTree = "<group>"; };
 		5E8A33B41CDD8DBE0075587B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5E8A33BD1CDD8DD80075587B /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		5E8A33BF1CDD90270075587B /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		5E8A33C41CDD91760075587B /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
+		5E8A33BD1CDD8DD80075587B /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Source/Models.swift; sourceTree = SOURCE_ROOT; };
+		5E8A33BF1CDD90270075587B /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = SOURCE_ROOT; };
+		5E8A33C41CDD91760075587B /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPRequest.swift; path = Source/HTTPRequest.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +100,7 @@
 				5E8A33A61CDD8DBE0075587B /* DribbbleSwift.h */,
 				5E8A33A81CDD8DBE0075587B /* Info.plist */,
 			);
-			name = Source;
-			path = ../Source;
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

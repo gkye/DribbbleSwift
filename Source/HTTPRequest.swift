@@ -19,6 +19,7 @@ public struct ClientReturn{
     }
 }
 
+
 class HTTPRequest{
     
     class func request(url: String, parameters: [String: AnyObject]?, completionHandler: (ClientReturn) -> ()) -> (){
