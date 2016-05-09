@@ -230,7 +230,7 @@ ConfigDS.setOAuth2Token("OAUTH2 TOKEN RECEIVED")
 #Users
 ###Get the authenticated user
 ```swift
- UserDS.getUser("Ramotion"){user _ in}
+ UserDS.getAuthenticatedUser(){ user in  }
 ```
 ###List a user’s buckets
 ```swift
