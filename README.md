@@ -14,7 +14,7 @@ pod 'DribbbleSwift'
 ```
 
 #Endpoints
-##GET
+##[GET](#examples-get)
 - [Buckets :pouch: ](#buckets-pouch)
 - [Projects :page_facing_up: ](#project-page_facing_up)
 - [Shots :camera: ](#shots-camera)
