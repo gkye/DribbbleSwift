@@ -255,4 +255,22 @@ ShotsDS.checkIfShotLiked(shotId: "2687276"){
             print(api.liked)
         }
 ```
+#Users
+###Get the authenticated user
+```swift
+ UserDS.getUser("Ramotion"){user _ in}
+```
+###List a user’s buckets
+```swift
+ UserDS.getAuthenticatedUserBuckets(perPage: 10, page: 1){bks in print(bks.0.json)   }
+```
+###List the authenticated user’s followers
+```swift
+ UserDS.getAuthenticatedUserFollowers(perPage: 10, page: 1){ flwrs in print(flwrs.followers?.count)}
+```
+###List who the authenticated user is following
+```swift
+ UserDS.getAuthenticatedUserFollowing(perPage: 10, page: 2){ fllwee in print(fllwee.followees?.count)}
+```
 
+ 
