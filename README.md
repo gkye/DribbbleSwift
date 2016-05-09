@@ -14,6 +14,7 @@ pod 'DribbbleSwift'
 ```
 
 #Endpoints
+##GET
 - [Buckets :pouch: ](#buckets-pouch)
 - [Projects :page_facing_up: ](#project-page_facing_up)
 - [Shots :camera: ](#shots-camera)
@@ -21,12 +22,13 @@ pod 'DribbbleSwift'
 - [Users :bowtie: ](#users-bowtie)
 
 #Config :shipit:
-**REQUIRED FOR ANY REQUEST TO WORK**
+
+
+##Examples (GET)
+**REQUIRED FOR ANY GET REQUEST TO WORK**
 ```swift
         ConfigDS.setAccessToken("YOUR ACCESS TOKEN")
 ```
-
-##Examples
 #Buckets :pouch:
 ###Get a bucket
 ```swift
