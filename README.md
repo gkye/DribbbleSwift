@@ -21,8 +21,9 @@ pod 'DribbbleSwift'
 - [Teams :busts_in_silhouette:](#team-busts_in_silhouette)
 - [Users :bowtie: ](#users-bowtie)
 
-#Config :shipit:
-
+##[Authenticated Request](#authenticated-request-lock)
+- [Configuration] (#config)
+- [Shots :camera: ](#shots)
 
 ##Examples (GET)
 **REQUIRED FOR ANY GET REQUEST TO WORK**
