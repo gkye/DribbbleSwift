@@ -217,3 +217,41 @@ Parameters
             print(api.teams?[0].members_count)
         }
 ```
+
+#Authenticated Request :lock:
+http://developer.dribbble.com/v1/oauth/ for more information about authentication process.
+###Config
+*MUST SET CONFIG TOKEN BEFORE ANY AUTHENTICATED REQUEST CAN BE EXECUTED*
+```swift
+ConfigDS.setOAuth2Token("OAUTH2 TOKEN RECEIVED")
+```
+
+##Shots
+`Liking and Unliking shot requires the user to be authenticated with the write scope.`
+
+###Like a shot
+```swift
+ ShotsDS.likeShot(shotId: "2678120"){
+            api in
+            print(api.statusCode)
+            print(api.success)
+        }
+```
+###Unlike a shot
+```swift
+ShotsDS.unlikeShot(shotId: "2678120"){
+            api in
+            print(api.statusCode)
+            print(api.unliked)
+            
+        }
+```
+###Checking if user liked a shot
+```swift
+ShotsDS.checkIfShotLiked(shotId: "2687276"){
+            api in
+            print(api.statusCode)
+            print(api.liked)
+        }
+```
+
