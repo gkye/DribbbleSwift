@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E8036D51CE12E510085998D /* AuthroizedRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8036D41CE12E510085998D /* AuthroizedRequests.swift */; };
 		5E8A33A71CDD8DBE0075587B /* DribbbleSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E8A33A61CDD8DBE0075587B /* DribbbleSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E8A33AE1CDD8DBE0075587B /* DribbbleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8A33A31CDD8DBD0075587B /* DribbbleSwift.framework */; };
 		5E8A33B31CDD8DBE0075587B /* DribbbleSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8A33B21CDD8DBE0075587B /* DribbbleSwiftTests.swift */; };
-		5E8A33BE1CDD8DD80075587B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8A33BD1CDD8DD80075587B /* Models.swift */; };
+		5E8A33BE1CDD8DD80075587B /* GetRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8A33BD1CDD8DD80075587B /* GetRequests.swift */; };
 		5E8A33C01CDD90270075587B /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8A33BF1CDD90270075587B /* SwiftyJSON.swift */; };
 		5E8A33C51CDD91760075587B /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8A33C41CDD91760075587B /* HTTPRequest.swift */; };
 /* End PBXBuildFile section */
@@ -26,13 +27,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E8036D41CE12E510085998D /* AuthroizedRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthroizedRequests.swift; path = Source/AuthroizedRequests.swift; sourceTree = SOURCE_ROOT; };
 		5E8A33A31CDD8DBD0075587B /* DribbbleSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DribbbleSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E8A33A61CDD8DBE0075587B /* DribbbleSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DribbbleSwift.h; path = Source/DribbbleSwift.h; sourceTree = SOURCE_ROOT; };
 		5E8A33A81CDD8DBE0075587B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E8A33AD1CDD8DBE0075587B /* DribbbleSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DribbbleSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E8A33B21CDD8DBE0075587B /* DribbbleSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DribbbleSwiftTests.swift; sourceTree = "<group>"; };
 		5E8A33B41CDD8DBE0075587B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5E8A33BD1CDD8DD80075587B /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Models.swift; path = Source/Models.swift; sourceTree = SOURCE_ROOT; };
+		5E8A33BD1CDD8DD80075587B /* GetRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GetRequests.swift; path = Source/GetRequests.swift; sourceTree = SOURCE_ROOT; };
 		5E8A33BF1CDD90270075587B /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = SOURCE_ROOT; };
 		5E8A33C41CDD91760075587B /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HTTPRequest.swift; path = Source/HTTPRequest.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -96,7 +98,8 @@
 			children = (
 				5E8A33BF1CDD90270075587B /* SwiftyJSON.swift */,
 				5E8A33C41CDD91760075587B /* HTTPRequest.swift */,
-				5E8A33BD1CDD8DD80075587B /* Models.swift */,
+				5E8A33BD1CDD8DD80075587B /* GetRequests.swift */,
+				5E8036D41CE12E510085998D /* AuthroizedRequests.swift */,
 				5E8A33A61CDD8DBE0075587B /* DribbbleSwift.h */,
 				5E8A33A81CDD8DBE0075587B /* Info.plist */,
 			);
@@ -211,8 +214,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E8A33BE1CDD8DD80075587B /* Models.swift in Sources */,
+				5E8A33BE1CDD8DD80075587B /* GetRequests.swift in Sources */,
 				5E8A33C51CDD91760075587B /* HTTPRequest.swift in Sources */,
+				5E8036D51CE12E510085998D /* AuthroizedRequests.swift in Sources */,
 				5E8A33C01CDD90270075587B /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

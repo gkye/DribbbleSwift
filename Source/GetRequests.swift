@@ -9,27 +9,15 @@
 import Foundation
 
 
-var access_token: String!
+var access_token: String! = nil
+var OAuth2Token: String! = nil
 
 public class ConfigDS{
     public class func setAccessToken(token: String!){
         access_token = token
-    }
+    }   
 }
 
-//Mark: Images
-
-public class ImagesDS{
-    public var hidpi: String?
-    public var normal: String!
-    public var teaser: String!
-    
-    init(json: JSON){
-        hidpi = json["hidpi"].string
-        normal = json["normal"].string
-        teaser = json["teaser"].string
-    }
-}
 
 
 //Mark: Shots
@@ -54,6 +42,21 @@ public enum ShotTimeFrameDS: String{
 public enum ShotSortDS: String{
     case comments, recent, views
 }
+
+//Mark: Images
+
+public class ImagesDS{
+    public var hidpi: String?
+    public var normal: String!
+    public var teaser: String!
+    
+    init(json: JSON){
+        hidpi = json["hidpi"].string
+        normal = json["normal"].string
+        teaser = json["teaser"].string
+    }
+}
+
 
 public class ShotsDS{
     public var id : Int!
@@ -377,7 +380,6 @@ public class UserAndTeamBaseModel{
 }
 
 //MARK: User
-//FIXME: Add Authenticed User
 
 public class FollowersDS{
     

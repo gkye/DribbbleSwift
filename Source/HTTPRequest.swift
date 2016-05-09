@@ -19,24 +19,52 @@ public struct ClientReturn{
     }
 }
 
+enum RequestType: String{
+    case GET, POST, DELETE
+}
+
 
 class HTTPRequest{
     
-    class func request(url: String, parameters: [String: AnyObject]?, completionHandler: (ClientReturn) -> ()) -> (){
+    class func request(url: String, parameters: [String: AnyObject]?, requestType: RequestType = .GET, authRequest: Bool = false, completionHandler: (ClientReturn) -> ()) -> (){
         
         let baseURL = "https://api.dribbble.com/v1"+url
         var url: NSURL!
         var params: [String: AnyObject] = [:]
-        if(parameters != nil){
-            params = parameters!
+        var request: NSMutableURLRequest!
+        
+        switch requestType {
+        case .GET:
+            if(parameters != nil){
+                params = parameters!
+            }
+            if(!authRequest){
+                params["access_token"] = access_token
+            }
+            let parameterString = params.stringFromHttpParameters()
+            url = NSURL(string: "\(baseURL)?\(parameterString)")!
+            request = NSMutableURLRequest(URL: url)
+        default:
+            print("OAUTH request")
         }
-        params["access_token"] = access_token
+
+        if(authRequest){
+            if(requestType == .GET && parameters != nil){
+                let parameterString = parameters!.stringFromHttpParameters()
+                url = NSURL(string: "\(baseURL)?\(parameterString)")!
+            }else{
+                url = NSURL(string: baseURL)
+            }
+            request = NSMutableURLRequest(URL: url)
+            if(OAuth2Token != nil){
+                request.addValue("Bearer \(OAuth2Token)", forHTTPHeaderField: "Authorization")
+            }else{
+                fatalError("OAuth token not set!")
+            }
+        }
         
-        let parameterString = params.stringFromHttpParameters()
-        url = NSURL(string: "\(baseURL)?\(parameterString)")!
-        
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
+        print(url)
+        request.HTTPMethod = requestType.rawValue
         request.addValue("application/vnd.dribbble.v1.text+json", forHTTPHeaderField: "Accept")
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request){ data, response, error in
