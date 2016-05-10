@@ -20,7 +20,7 @@ public struct ClientReturn{
 }
 
 enum RequestType: String{
-    case GET, POST, DELETE
+    case GET, POST, DELETE, PUT
 }
 
 
@@ -45,7 +45,7 @@ class HTTPRequest{
             url = NSURL(string: "\(baseURL)?\(parameterString)")!
             request = NSMutableURLRequest(URL: url)
         default:
-            print("OAUTH request")
+            break;
         }
 
         if(authRequest){
@@ -63,7 +63,6 @@ class HTTPRequest{
             }
         }
         
-        print(url)
         request.HTTPMethod = requestType.rawValue
         request.addValue("application/vnd.dribbble.v1.text+json", forHTTPHeaderField: "Accept")
         
