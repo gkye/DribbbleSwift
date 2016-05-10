@@ -230,19 +230,51 @@ ConfigDS.setOAuth2Token("OAUTH2 TOKEN RECEIVED")
 #Users
 ###Get the authenticated user
 ```swift
- UserDS.getAuthenticatedUser(){ user in  }
+ UserDS.getAuthUser(){ user in  }
 ```
 ###List a user’s buckets
 ```swift
- UserDS.getAuthenticatedUserBuckets(perPage: 10, page: 1){bks in print(bks.0.json)   }
+ UserDS.getAuthUserBuckets(perPage: 10, page: 1){bks in print(bks.0.json)   }
 ```
 ###List the authenticated user’s followers
 ```swift
- UserDS.getAuthenticatedUserFollowers(perPage: 10, page: 1){ flwrs in print(flwrs.followers?.count)}
+ UserDS.getAuthUserFollowers(perPage: 10, page: 1){ flwrs in print(flwrs.followers?.count)}
 ```
 ###List who the authenticated user is following
 ```swift
- UserDS.getAuthenticatedUserFollowing(perPage: 10, page: 2){ fllwee in print(fllwee.followees?.count)}
+ UserDS.getAuthUserFollowing(perPage: 10, page: 2){ fllwee in print(fllwee.followees?.count)}
+```
+###List shots for users followed by a user
+```swift
+   UserDS.userFollowingShots(){  shots in print(shots.shots?[0].title) }
+```
+###Check if AuthUser following a user
+```swift
+ UserDS.checkIfAuthUserFollowingUser("Ramotion"){ status in print(status.isFollowing) }
+```
+###Follow a user
+```swift
+   UserDS.followUser("wearepanic"){ status in print(status.followed) }
+```
+###Unfollow a user
+```swift   
+  UserDS.unfollowUser("Shopify"){ status in print(status.unfollowed) }
+```
+###List shot likes for user
+```swift
+  UserDS.getAuthLikes(perPage: 20, page: 1){ likedShots in print(likedShots.likes?[0].shot.title) }
+```
+###List a user’s projects
+```swift
+  UserDS.getAuthBuckets(){ api in print(api.buckets?[0].name) }
+```
+###List shots for a user
+```swift
+  UserDS.getAuthProjects(perPage: 10, page: 1){ api in print(api.projects?[0].name) }
+```
+###List a user’s teams
+```swift
+  UserDS.getAuthShots(perPage: 10, page: 3){ api in print(api.shots?[0].title) }
 ```
 
 ##Shots
