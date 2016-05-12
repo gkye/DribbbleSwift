@@ -137,7 +137,6 @@ extension UserDS{
             api in
             var following: Bool!
             if let httpResponse = api.response as? NSHTTPURLResponse{
-                print(httpResponse.statusCode)
                 switch httpResponse.statusCode{
                 case 204:
                     following = true
