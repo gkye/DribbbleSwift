@@ -344,6 +344,7 @@ public class UserAndTeamBaseModel{
     public var teams_url: String!
     public var created_at: String!
     public var updated_at: String!
+    public var teams_count: Int!
     
     init(json: JSON){
         
@@ -375,7 +376,7 @@ public class UserAndTeamBaseModel{
         teams_url = json["teams_url"].string
         created_at = json["created_at"].string
         updated_at = json["updated_at"].string
-        
+        teams_count = json["teams_count"].int
     }
 }
 
