@@ -345,7 +345,7 @@ public class UserAndTeamBaseModel{
     public var created_at: String!
     public var updated_at: String!
     public var teams_count: Int!
-    
+
     init(json: JSON){
         
         id = json["id"].int
@@ -377,6 +377,7 @@ public class UserAndTeamBaseModel{
         created_at = json["created_at"].string
         updated_at = json["updated_at"].string
         teams_count = json["teams_count"].int
+        
     }
 }
 
@@ -387,6 +388,7 @@ public class FollowersDS{
     public var id: Int!
     public var created_at: String!
     public var follower: UserDS!
+
     
     init(json: JSON){
         id = json["id"].int
@@ -428,6 +430,16 @@ public class FolloweeDS{
 }
 
 public class UserDS: UserAndTeamBaseModel{
+    
+    public var team: TeamDS?
+
+    override init(json: JSON) {
+        super.init(json: json)
+        
+        if(json["type"] == "Team"){
+            team = TeamDS.init(team: json)
+        }
+    }
     
     public class func initializeArray(json: JSON)->[UserDS] {
         var userArray = [UserDS]()

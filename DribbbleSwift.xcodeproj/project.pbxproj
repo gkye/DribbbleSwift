@@ -30,7 +30,7 @@
 		5E8036D41CE12E510085998D /* AuthroizedRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthroizedRequests.swift; path = Source/AuthroizedRequests.swift; sourceTree = SOURCE_ROOT; };
 		5E8A33A31CDD8DBD0075587B /* DribbbleSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DribbbleSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E8A33A61CDD8DBE0075587B /* DribbbleSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DribbbleSwift.h; path = Source/DribbbleSwift.h; sourceTree = SOURCE_ROOT; };
-		5E8A33A81CDD8DBE0075587B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5E8A33A81CDD8DBE0075587B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; sourceTree = SOURCE_ROOT; };
 		5E8A33AD1CDD8DBE0075587B /* DribbbleSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DribbbleSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E8A33B21CDD8DBE0075587B /* DribbbleSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DribbbleSwiftTests.swift; sourceTree = "<group>"; };
 		5E8A33B41CDD8DBE0075587B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
