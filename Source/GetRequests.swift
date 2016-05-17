@@ -381,7 +381,7 @@ public class UserAndTeamBaseModel{
     }
 }
 
-//MARK: User
+//MARK: FollowersDS
 
 public class FollowersDS{
     
@@ -406,7 +406,7 @@ public class FollowersDS{
     
 }
 
-
+//MARK: FolloweeDS
 public class FolloweeDS{
     
     public var id: Int!
@@ -429,6 +429,7 @@ public class FolloweeDS{
     
 }
 
+//MARK: UserDS
 public class UserDS: UserAndTeamBaseModel{
     
     public var team: TeamDS?
@@ -653,7 +654,6 @@ public class UserDS: UserAndTeamBaseModel{
         }
     }
     
-    
 }
 
 //Mark: Team
@@ -729,6 +729,7 @@ public class TeamDS: UserAndTeamBaseModel{
 
 //Mark: Likes
 
+//MARK: ShotLikes
 public class ShotLikesDS{
     public var id: Int!
     public var created_at: String!
@@ -749,6 +750,7 @@ public class ShotLikesDS{
     }
 }
 
+//MARK: UserLikes
 public class UserLikesDS {
     public var id: Int!
     public var created_at: String!
