@@ -147,7 +147,6 @@ public class ShotsDS: ArrayProtocol{
         
         let url = "/shots"
         var params: [String: AnyObject] = [:]
-        
         params["per_page"] = perPage
         params["page"] = page
         if(list != nil){
@@ -386,7 +385,6 @@ public class UserAndTeamBaseModel{
         created_at = json["created_at"].string
         updated_at = json["updated_at"].string
         teams_count = json["teams_count"].int
-        
     }
 }
 
@@ -398,14 +396,11 @@ public class FollowersDS: ArrayProtocol{
     public var created_at: String!
     public var follower: UserDS!
 
-    
     required public init(json: JSON){
         id = json["id"].int
         created_at = json["created_at"].string
         follower = UserDS.init(json: json["follower"])
     }
-    
-    
 }
 
 //MARK: FolloweeDS
@@ -427,7 +422,6 @@ public class FolloweeDS: ArrayProtocol{
 public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
     
     public var team: TeamDS?
-
     override required public init(json: JSON) {
         super.init(json: json)
         
