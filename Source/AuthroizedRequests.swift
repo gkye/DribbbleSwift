@@ -50,7 +50,7 @@ extension UserDS{
             api in
             var buckets: [BucketDS]?
             if let json = api.json{
-                buckets = BucketDS.initializeArray(json)
+                buckets = BucketDS.initArray(json: json)
             }
             completionHandler(api, buckets: buckets)
         }
@@ -72,7 +72,7 @@ extension UserDS{
             api in
             var users: [FollowersDS]?
             if let json = api.json{
-                users = FollowersDS.initializeArray(json)
+                users = FollowersDS.initArray(json: json)
             }
             completionHandler(api, followers: users)
         }
@@ -96,7 +96,7 @@ extension UserDS{
             api in
             var users: [FolloweeDS]?
             if let json = api.json{
-                users = FolloweeDS.initializeArray(json)
+                users = FolloweeDS.initArray(json: json)
             }
             completionHandler(api, followees: users)
         }
@@ -119,7 +119,7 @@ extension UserDS{
             api in
             var shots: [ShotsDS]?
             if let json = api.json{
-                shots = ShotsDS.initializeArray(json)
+                shots = ShotsDS.initArray(json: json)
             }
             completionHandler(api, shots: shots)
         }
@@ -213,7 +213,7 @@ extension UserDS{
             api in
             var buckets: [BucketDS]?
             if let json = api.json{
-                buckets = BucketDS.initializeArray(json)
+                buckets = BucketDS.initArray(json: json)
             }
             completionHandler(api, buckets: buckets)
         }
@@ -235,7 +235,7 @@ extension UserDS{
             api in
             var shots: [UserLikesDS]?
             if let json = api.json{
-                shots = UserLikesDS.initializeArray(json)
+                shots = UserLikesDS.initArray(json: json)
             }
             completionHandler(api, likes: shots)
         }
@@ -257,7 +257,7 @@ extension UserDS{
             api in
             var projects: [ProjectDS]?
             if let json = api.json{
-                projects = ProjectDS.initializeArray(json)
+                projects = ProjectDS.initArray(json: json)
             }
             completionHandler(api, projects: projects)
         }
@@ -279,7 +279,7 @@ extension UserDS{
             api in
             var projects: [ShotsDS]?
             if let json = api.json{
-                projects = ShotsDS.initializeArray(json)
+                projects = ShotsDS.initArray(json: json)
             }
             completionHandler(api, shots: projects)
         }
@@ -297,7 +297,7 @@ extension UserDS{
             api in
             var projects: [TeamDS]?
             if let json = api.json{
-                projects = TeamDS.initializeArray(json)
+                projects = TeamDS.initArray(json: json)
             }
             completionHandler(api, teams: projects)
         }

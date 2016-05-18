@@ -20,6 +20,23 @@ public class ConfigDS{
 
 
 
+//MARK: Array protocol returns an array of types by initlizaing using the json passed
+protocol ArrayProtocol {
+    init(json: JSON)
+}
+
+extension ArrayProtocol {
+    
+    static func initArray<T:ArrayProtocol>(json json: JSON) -> [T] {
+        var array = [T]()
+        json.forEach(){
+            array.append(T.init(json: $0.1))
+        }
+        return array
+    }
+}
+
+
 //Mark: Shots
 
 /**
@@ -58,7 +75,7 @@ public class ImagesDS{
 }
 
 
-public class ShotsDS{
+public class ShotsDS: ArrayProtocol{
     public var id : Int!
     public var title : String!
     public var description : String?
@@ -85,7 +102,7 @@ public class ShotsDS{
     public var user: UserDS!
     public var team: TeamDS?
     
-    init(json: JSON){
+    required public init(json: JSON){
         id = json["id"].int
         title = json["title"].string
         description = json["description"].string
@@ -110,18 +127,10 @@ public class ShotsDS{
         animated = json["animated"].bool
         tags = json["tags"].arrayObject as? [String]
         user = UserDS.init(json: json["user"])
-        team = TeamDS.init(team: json["team"])
+        team = TeamDS.init(json: json["team"])
         
     }
-    
-    class func initializeArray(json: JSON)->[ShotsDS]? {
-        var shotsArray = [ShotsDS]()
-        for i in 0..<json.count{
-            shotsArray.append(ShotsDS(json: json[i]))
-        }
-        
-        return shotsArray
-    }
+
     /**
      List shots
      
@@ -158,7 +167,7 @@ public class ShotsDS{
             api in
             var shots: [ShotsDS]?
             if let json = api.json{
-                shots = ShotsDS.initializeArray(json)
+                shots = ShotsDS.initArray(json: json)
             }
             completionHandler(api, shots: shots)
         }
@@ -182,7 +191,7 @@ public class ShotsDS{
             api in
             var attachments: [AttachmentDS]?
             if let json = api.json{
-                attachments = AttachmentDS.initializeArray(json)
+                attachments = AttachmentDS.initArray(json: json)
             }
             completionHandler(api, attachments: attachments)
         }
@@ -205,7 +214,7 @@ public class ShotsDS{
             api in
             var buckets: [BucketDS]?
             if let json = api.json{
-                buckets = BucketDS.initializeArray(json)
+                buckets = BucketDS.initArray(json: json)
             }
             completionHandler(api, buckets: buckets)
         }
@@ -229,7 +238,7 @@ public class ShotsDS{
             api in
             var comments:[CommentDS]?
             if let json = api.json{
-                comments = CommentDS.initializeArray(json)
+                comments = CommentDS.initArray(json: json)
             }
             completionHandler(api, comments: comments)
         }
@@ -254,7 +263,7 @@ public class ShotsDS{
             api in
             var likes:[ShotLikesDS]?
             if let json = api.json{
-                likes = ShotLikesDS.initializeArray(json)
+                likes = ShotLikesDS.initArray(json: json)
             }
             completionHandler(api, likes: likes)
         }
@@ -279,7 +288,7 @@ public class ShotsDS{
             api in
             var project:[ProjectDS]?
             if let json = api.json{
-                project = ProjectDS.initializeArray(json)
+                project = ProjectDS.initArray(json: json)
             }
             completionHandler(api, projects: project)
         }
@@ -305,7 +314,7 @@ public class ShotsDS{
             api in
             var shots:[ShotsDS]?
             if let json = api.json{
-                shots = ShotsDS.initializeArray(json)
+                shots = ShotsDS.initArray(json: json)
             }
             completionHandler(api, rebounds: shots)
         }
@@ -383,72 +392,50 @@ public class UserAndTeamBaseModel{
 
 //MARK: FollowersDS
 
-public class FollowersDS{
+public class FollowersDS: ArrayProtocol{
     
     public var id: Int!
     public var created_at: String!
     public var follower: UserDS!
 
     
-    init(json: JSON){
+    required public init(json: JSON){
         id = json["id"].int
         created_at = json["created_at"].string
         follower = UserDS.init(json: json["follower"])
     }
     
-    public class func initializeArray(json: JSON)->[FollowersDS] {
-        var followersArray = [FollowersDS]()
-        for i in 0..<json.count{
-            followersArray.append(FollowersDS(json: json[i]))
-        }
-        return followersArray
-    }
     
 }
 
 //MARK: FolloweeDS
-public class FolloweeDS{
+public class FolloweeDS: ArrayProtocol{
     
     public var id: Int!
     public var created_at: String!
     public var followee: UserDS!
     
-    init(json: JSON){
+    required public init(json: JSON){
         id = json["id"].int
         created_at = json["created_at"].string
         followee = UserDS.init(json: json["followee"])
     }
     
-    public class func initializeArray(json: JSON)->[FolloweeDS] {
-        var followersArray = [FolloweeDS]()
-        for i in 0..<json.count{
-            followersArray.append(FolloweeDS(json: json[i]))
-        }
-        return followersArray
-    }
-    
 }
 
 //MARK: UserDS
-public class UserDS: UserAndTeamBaseModel{
+public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
     
     public var team: TeamDS?
 
-    override init(json: JSON) {
+    override required public init(json: JSON) {
         super.init(json: json)
         
         if(json["type"] == "Team"){
-            team = TeamDS.init(team: json)
+            team = TeamDS.init(json: json)
         }
     }
-    
-    public class func initializeArray(json: JSON)->[UserDS] {
-        var userArray = [UserDS]()
-        for i in 0..<json.count{
-            userArray.append(UserDS(json: json[i]))
-        }
-        return userArray
-    }
+
     /**
      Get a single user
      
@@ -485,7 +472,7 @@ public class UserDS: UserAndTeamBaseModel{
             api in
             var buckets: [BucketDS]?
             if let json = api.json{
-                buckets = BucketDS.initializeArray(json)
+                buckets = BucketDS.initArray(json: json)
             }
             completionHandler(api, buckets: buckets)
         }
@@ -509,7 +496,7 @@ public class UserDS: UserAndTeamBaseModel{
             api in
             var users: [FollowersDS]?
             if let json = api.json{
-                users = FollowersDS.initializeArray(json)
+                users = FollowersDS.initArray(json: json)
             }
             completionHandler(api, followers: users)
         }
@@ -533,7 +520,7 @@ public class UserDS: UserAndTeamBaseModel{
             api in
             var users: [FolloweeDS]?
             if let json = api.json{
-                users = FolloweeDS.initializeArray(json)
+                users = FolloweeDS.initArray(json: json)
             }
             completionHandler(api, followees: users)
         }
@@ -581,7 +568,7 @@ public class UserDS: UserAndTeamBaseModel{
             api in
             var shots: [UserLikesDS]?
             if let json = api.json{
-                shots = UserLikesDS.initializeArray(json)
+                shots = UserLikesDS.initArray(json: json)
             }
             completionHandler(api, likes: shots)
         }
@@ -605,7 +592,7 @@ public class UserDS: UserAndTeamBaseModel{
             api in
             var projects: [ProjectDS]?
             if let json = api.json{
-                projects = ProjectDS.initializeArray(json)
+                projects = ProjectDS.initArray(json: json)
             }
             completionHandler(api, projects: projects)
         }
@@ -628,7 +615,7 @@ public class UserDS: UserAndTeamBaseModel{
             api in
             var projects: [ShotsDS]?
             if let json = api.json{
-                projects = ShotsDS.initializeArray(json)
+                projects = ShotsDS.initArray(json: json)
             }
             completionHandler(api, shots: projects)
         }
@@ -648,7 +635,7 @@ public class UserDS: UserAndTeamBaseModel{
             api in
             var projects: [TeamDS]?
             if let json = api.json{
-                projects = TeamDS.initializeArray(json)
+                projects = TeamDS.initArray(json: json)
             }
             completionHandler(api, teams: projects)
         }
@@ -658,26 +645,19 @@ public class UserDS: UserAndTeamBaseModel{
 
 //Mark: Team
 
-public class TeamDS: UserAndTeamBaseModel{
+public class TeamDS: UserAndTeamBaseModel, ArrayProtocol{
     
     public var members_count: Int!
     public var members_url: String!
     public var team_shots_url: String!
     
-    public init(team: JSON){
-        super.init(json: team)
-        members_count = team["members_count"].int
-        members_url = team["members_url"].string
-        team_shots_url = team["team_shots_url"].string
+    public required override init(json: JSON){
+        super.init(json: json)
+        members_count = json["members_count"].int
+        members_url = json["members_url"].string
+        team_shots_url = json["team_shots_url"].string
     }
     
-    public class func initializeArray(json: JSON)->[TeamDS] {
-        var teamArray = [TeamDS]()
-        for i in 0..<json.count{
-            teamArray.append(TeamDS(team: json[i]))
-        }
-        return teamArray
-    }
     
     /**
      List a team’s members
@@ -695,7 +675,7 @@ public class TeamDS: UserAndTeamBaseModel{
             api in
             var members: [UserDS]?
             if let json = api.json{
-                members = UserDS.initializeArray(json)
+                members = UserDS.initArray(json: json)
             }
             completionHandler(api, members: members)
         }
@@ -719,7 +699,7 @@ public class TeamDS: UserAndTeamBaseModel{
             api in
             var shots: [ShotsDS]?
             if let json = api.json{
-                shots = ShotsDS.initializeArray(json)
+                shots = ShotsDS.initArray(json: json)
             }
             completionHandler(api, shots: shots)
         }
@@ -730,50 +710,34 @@ public class TeamDS: UserAndTeamBaseModel{
 //Mark: Likes
 
 //MARK: ShotLikes
-public class ShotLikesDS{
+public class ShotLikesDS: ArrayProtocol{
     public var id: Int!
     public var created_at: String!
     public var user: UserDS!
     
-    public init(json: JSON){
+    public required init(json: JSON){
         id = json["id"].int
         created_at = json["created_at"].string
         user = UserDS.init(json: json["user"])
     }
-    
-    public class func initializeArray(json: JSON)->[ShotLikesDS] {
-        var likesArray = [ShotLikesDS]()
-        for i in 0..<json.count {
-            likesArray.append(ShotLikesDS(json: json[i]))
-        }
-        return likesArray
-    }
 }
 
 //MARK: UserLikes
-public class UserLikesDS {
+public class UserLikesDS: ArrayProtocol {
     public var id: Int!
     public var created_at: String!
     public var shot: ShotsDS!
     
-    public init(json: JSON){
+    public required init(json: JSON){
         id = json["id"].int
         created_at = json["created_at"].string
         shot = ShotsDS.init(json: json["shot"])
-    }
-    
-    public class func initializeArray(json: JSON)->[UserLikesDS] {
-        var likesArray = [UserLikesDS]()
-        for i in 0..<json.count {
-            likesArray.append(UserLikesDS(json: json[i]))
-        }
-        return likesArray
     }
 }
 
 //Mark: Comments
 
-public class CommentDS{
+public class CommentDS: ArrayProtocol{
     
     public var id: Int!
     public var body: String!
@@ -783,7 +747,7 @@ public class CommentDS{
     public var updated_at: String!
     public var user: UserDS!
     
-    public init(json: JSON){
+    public required init(json: JSON){
         id = json["id"].int
         body = json["body_text"].string
         likes_count = json["likes_count"].int
@@ -792,19 +756,11 @@ public class CommentDS{
         updated_at = json["updated_at"].string
         user = UserDS.init(json: json["user"])
     }
-    
-    public class func initializeArray(json: JSON)->[CommentDS] {
-        var comments = [CommentDS]()
-        for i in 0..<json.count {
-            comments.append(CommentDS(json: json[i]))
-        }
-        return comments
-    }
 }
 
 //Mark: Attachment
 
-public class AttachmentDS{
+public class AttachmentDS: ArrayProtocol{
     
     public var id: Int!
     public var url: String!
@@ -814,7 +770,7 @@ public class AttachmentDS{
     public var views_count: Int!
     public var created_at: String!
     
-    public init(json: JSON){
+    public required init(json: JSON){
         id = json["id"].int
         url = json["url"].string
         thumbnail_url = json["thumbnail_url"].string
@@ -823,23 +779,12 @@ public class AttachmentDS{
         views_count = json["views_count"].int
         created_at = json["created_at"].string
     }
-    
-    public class func initializeArray(json: JSON)->[AttachmentDS] {
-        var attachments = [AttachmentDS]()
-        for i in 0..<json.count {
-            attachments.append(AttachmentDS(json: json[i]))
-        }
-        
-        return attachments
-    }
-    
-    
 }
 
 
 //Mark: Bucket
 
-public class BucketDS{
+public class BucketDS: ArrayProtocol{
     
     public var id: Int!
     public var name: String!
@@ -849,7 +794,7 @@ public class BucketDS{
     public var updated_at: String!
     public var user: UserDS!
     
-    public init(json: JSON){
+    public required init(json: JSON){
         id = json["id"].int
         name = json["name"].string
         description = json["description"].string
@@ -857,14 +802,7 @@ public class BucketDS{
         updated_at = json["updated_at"].string
         user = UserDS.init(json: json["user"])
     }
-    
-    public class func initializeArray(json: JSON)->[BucketDS] {
-        var buckets = [BucketDS]()
-        for i in 0...json.count {
-            buckets.append(BucketDS(json: json[i]))
-        }
-        return buckets
-    }
+
     
     /**
      Get a bucket
@@ -902,7 +840,7 @@ public class BucketDS{
             api in
             var shots: [ShotsDS]?
             if let json = api.json{
-                shots = ShotsDS.initializeArray(json)
+                shots = ShotsDS.initArray(json: json)
             }
             completionHandler(clientReturn: api, shots: shots)
             
@@ -913,7 +851,7 @@ public class BucketDS{
 
 //Mark: Project
 
-public class ProjectDS{
+public class ProjectDS: ArrayProtocol{
     
     public var id: Int!
     public var name: String!
@@ -923,7 +861,7 @@ public class ProjectDS{
     public var updated_at: String!
     public var user: UserDS!
     
-    public init(json: JSON){
+    public required init(json: JSON){
         id = json["id"].int
         name = json["name"].string
         description = json["description"].string
@@ -931,14 +869,7 @@ public class ProjectDS{
         updated_at = json["updated_at"].string
         user = UserDS.init(json: json["user"])
     }
-    
-    public class func initializeArray(json: JSON)->[ProjectDS] {
-        var projects = [ProjectDS]()
-        for i in 0...json.count {
-            projects.append(ProjectDS(json: json[i]))
-        }
-        return projects
-    }
+  
     
     /**
      Get a project
@@ -976,7 +907,7 @@ public class ProjectDS{
             api in
             var shots: [ShotsDS]?
             if let json = api.json{
-                shots = ShotsDS.initializeArray(json)
+                shots = ShotsDS.initArray(json: json)
             }
             completionHandler(clientReturn: api, shots: shots)
             
