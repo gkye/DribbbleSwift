@@ -156,7 +156,7 @@ extension UserDS{
      */
     
     public class func followUser(username: String, completionHandler: (ClientReturn, followed: Bool) -> ()) -> (){
-        let url = "/user/\(username)/follow"
+        let url = "/users/\(username)/follow"
         HTTPRequest.request(url, parameters: nil, requestType: .PUT, authRequest: true){
             api in
             var following: Bool!
@@ -181,7 +181,7 @@ extension UserDS{
      */
     
     public class func unfollowUser(username: String, completionHandler: (ClientReturn, unfollowed: Bool) -> ()) -> (){
-        let url = "/user/\(username)/follow"
+        let url = "/users/\(username)/follow"
         HTTPRequest.request(url, parameters: nil, requestType: .DELETE, authRequest: true){
             api in
             var following: Bool!
