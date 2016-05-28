@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E3BBB3E1CFA5675003D60BB /* DribbbleSwiftWatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E3BBB3D1CFA5675003D60BB /* DribbbleSwiftWatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5E3BBB431CFA5681003D60BB /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8A33BF1CDD90270075587B /* SwiftyJSON.swift */; };
-		5E3BBB441CFA5681003D60BB /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8A33C41CDD91760075587B /* HTTPRequest.swift */; };
-		5E3BBB451CFA5681003D60BB /* GetRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8A33BD1CDD8DD80075587B /* GetRequests.swift */; };
-		5E3BBB461CFA5681003D60BB /* AuthroizedRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8036D41CE12E510085998D /* AuthroizedRequests.swift */; };
 		5E8036D51CE12E510085998D /* AuthroizedRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E8036D41CE12E510085998D /* AuthroizedRequests.swift */; };
 		5E8A33A71CDD8DBE0075587B /* DribbbleSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 5E8A33A61CDD8DBE0075587B /* DribbbleSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5E8A33AE1CDD8DBE0075587B /* DribbbleSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E8A33A31CDD8DBD0075587B /* DribbbleSwift.framework */; };
@@ -32,9 +27,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		5E3BBB3B1CFA5674003D60BB /* DribbbleSwiftWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DribbbleSwiftWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E3BBB3D1CFA5675003D60BB /* DribbbleSwiftWatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DribbbleSwiftWatch.h; sourceTree = "<group>"; };
-		5E3BBB3F1CFA5675003D60BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5E8036D41CE12E510085998D /* AuthroizedRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthroizedRequests.swift; path = Source/AuthroizedRequests.swift; sourceTree = SOURCE_ROOT; };
 		5E8A33A31CDD8DBD0075587B /* DribbbleSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DribbbleSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E8A33A61CDD8DBE0075587B /* DribbbleSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DribbbleSwift.h; path = Source/DribbbleSwift.h; sourceTree = SOURCE_ROOT; };
@@ -48,13 +40,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5E3BBB371CFA5674003D60BB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5E8A339F1CDD8DBD0075587B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -73,21 +58,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5E3BBB3C1CFA5675003D60BB /* DribbbleSwiftWatch */ = {
-			isa = PBXGroup;
-			children = (
-				5E3BBB3D1CFA5675003D60BB /* DribbbleSwiftWatch.h */,
-				5E3BBB3F1CFA5675003D60BB /* Info.plist */,
-			);
-			path = DribbbleSwiftWatch;
-			sourceTree = "<group>";
-		};
 		5E8A33991CDD8DBD0075587B = {
 			isa = PBXGroup;
 			children = (
 				5E8A33A51CDD8DBE0075587B /* DribbbleSwift */,
 				5E8A33B11CDD8DBE0075587B /* DribbbleSwiftTests */,
-				5E3BBB3C1CFA5675003D60BB /* DribbbleSwiftWatch */,
 				5E8A33A41CDD8DBD0075587B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -97,7 +72,6 @@
 			children = (
 				5E8A33A31CDD8DBD0075587B /* DribbbleSwift.framework */,
 				5E8A33AD1CDD8DBE0075587B /* DribbbleSwiftTests.xctest */,
-				5E3BBB3B1CFA5674003D60BB /* DribbbleSwiftWatch.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -135,14 +109,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		5E3BBB381CFA5674003D60BB /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5E3BBB3E1CFA5675003D60BB /* DribbbleSwiftWatch.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5E8A33A01CDD8DBD0075587B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -154,24 +120,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		5E3BBB3A1CFA5674003D60BB /* DribbbleSwiftWatch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5E3BBB401CFA5675003D60BB /* Build configuration list for PBXNativeTarget "DribbbleSwiftWatch" */;
-			buildPhases = (
-				5E3BBB361CFA5674003D60BB /* Sources */,
-				5E3BBB371CFA5674003D60BB /* Frameworks */,
-				5E3BBB381CFA5674003D60BB /* Headers */,
-				5E3BBB391CFA5674003D60BB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = DribbbleSwiftWatch;
-			productName = DribbbleSwiftWatch;
-			productReference = 5E3BBB3B1CFA5674003D60BB /* DribbbleSwiftWatch.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 		5E8A33A21CDD8DBD0075587B /* DribbbleSwift */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5E8A33B71CDD8DBE0075587B /* Build configuration list for PBXNativeTarget "DribbbleSwift" */;
@@ -218,9 +166,6 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = George;
 				TargetAttributes = {
-					5E3BBB3A1CFA5674003D60BB = {
-						CreatedOnToolsVersion = 7.3;
-					};
 					5E8A33A21CDD8DBD0075587B = {
 						CreatedOnToolsVersion = 7.3;
 					};
@@ -243,19 +188,11 @@
 			targets = (
 				5E8A33A21CDD8DBD0075587B /* DribbbleSwift */,
 				5E8A33AC1CDD8DBE0075587B /* DribbbleSwiftTests */,
-				5E3BBB3A1CFA5674003D60BB /* DribbbleSwiftWatch */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5E3BBB391CFA5674003D60BB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5E8A33A11CDD8DBD0075587B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -273,17 +210,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5E3BBB361CFA5674003D60BB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5E3BBB431CFA5681003D60BB /* SwiftyJSON.swift in Sources */,
-				5E3BBB441CFA5681003D60BB /* HTTPRequest.swift in Sources */,
-				5E3BBB451CFA5681003D60BB /* GetRequests.swift in Sources */,
-				5E3BBB461CFA5681003D60BB /* AuthroizedRequests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		5E8A339E1CDD8DBD0075587B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -314,46 +240,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		5E3BBB411CFA5675003D60BB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = DribbbleSwiftWatch/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = GeorgeKye.DribbbleSwiftWatch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
-			};
-			name = Debug;
-		};
-		5E3BBB421CFA5675003D60BB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = DribbbleSwiftWatch/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = GeorgeKye.DribbbleSwiftWatch;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.2;
-			};
-			name = Release;
-		};
 		5E8A33B51CDD8DBE0075587B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -507,14 +393,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5E3BBB401CFA5675003D60BB /* Build configuration list for PBXNativeTarget "DribbbleSwiftWatch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5E3BBB411CFA5675003D60BB /* Debug */,
-				5E3BBB421CFA5675003D60BB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
 		5E8A339D1CDD8DBD0075587B /* Build configuration list for PBXProject "DribbbleSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
