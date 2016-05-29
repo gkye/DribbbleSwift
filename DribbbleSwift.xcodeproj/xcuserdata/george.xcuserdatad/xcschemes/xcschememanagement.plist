@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>DribbbleSwift watchOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>DribbbleSwift.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>5E3BBB3A1CFA5674003D60BB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5E3BBBCA1CFABA8A003D60BB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
