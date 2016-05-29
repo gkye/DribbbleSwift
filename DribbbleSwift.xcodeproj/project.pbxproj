@@ -146,8 +146,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5E3BBBD21CFABA8A003D60BB /* Build configuration list for PBXNativeTarget "DribbbleSwift watchOS" */;
 			buildPhases = (
-				5E3BBBC61CFABA8A003D60BB /* Sources */,
 				5E3BBBC71CFABA8A003D60BB /* Frameworks */,
+				5E3BBBC61CFABA8A003D60BB /* Sources */,
 				5E3BBBC81CFABA8A003D60BB /* Headers */,
 				5E3BBBC91CFABA8A003D60BB /* Resources */,
 			);
@@ -265,9 +265,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E3BBBD61CFABADB003D60BB /* GetRequests.swift in Sources */,
 				5E3BBBD41CFABADB003D60BB /* SwiftyJSON.swift in Sources */,
 				5E3BBBD51CFABADB003D60BB /* HTTPRequest.swift in Sources */,
-				5E3BBBD61CFABADB003D60BB /* GetRequests.swift in Sources */,
 				5E3BBBD71CFABADB003D60BB /* AuthroizedRequests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +502,7 @@
 				5E3BBBD11CFABA8A003D60BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5E8A339D1CDD8DBD0075587B /* Build configuration list for PBXProject "DribbbleSwift" */ = {
 			isa = XCConfigurationList;
