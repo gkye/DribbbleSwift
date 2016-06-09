@@ -64,7 +64,7 @@ class HTTPRequest{
         }
         
         request.HTTPMethod = requestType.rawValue
-        request.addValue("application/vnd.dribbble.v1.text+json", forHTTPHeaderField: "Accept")
+        //request.addValue("application/vnd.dribbble.v1.text+json", forHTTPHeaderField: "Accept")
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request){ data, response, error in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
