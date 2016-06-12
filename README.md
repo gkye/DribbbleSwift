@@ -1,3 +1,8 @@
+[![codebeat badge](https://codebeat.co/badges/b923e143-4915-4a2d-b4c5-032b10d06346)](https://codebeat.co/projects/github-com-gkye-dribbbleswift)
+[![Version](https://img.shields.io/cocoapods/v/DribbbleSwift.svg?style=flat)](http://cocoapods.org/pods/Swiper)
+[![License](https://img.shields.io/cocoapods/l/DribbbleSwift.svg?style=flat)](http://cocoapods.org/pods/Swiper)
+[![Platform](https://img.shields.io/cocoapods/p/DribbbleSwift.svg?style=flat)](http://cocoapods.org/pods/Swiper)
+
 #Usage
 ###Register Dribble application
 https://dribbble.com/account/applications/new
