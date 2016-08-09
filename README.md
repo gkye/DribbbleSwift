@@ -34,7 +34,7 @@ pod 'DribbbleSwift'
 ##Examples (GET)
 **REQUIRED FOR ANY GET REQUEST TO WORK**
 ```swift
-        ConfigDS.setAccessToken("YOUR ACCESS TOKEN")
+ ConfigDS.setAccessToken("YOUR ACCESS TOKEN")
 ```
 #Buckets :pouch:
 ###Get a bucket
