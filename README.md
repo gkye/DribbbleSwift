@@ -32,7 +32,7 @@ pod 'DribbbleSwift'
 - [Shots :camera: ](#shots)
 
 ##Examples (GET)
-**REQUIRED FOR ANY GET REQUEST TO WORK**
+**REQUIRED FOR ANY GET REQUEST TO WORK (AccessToken must be set before each GET request)**
 ```swift
  ConfigDS.setAccessToken("YOUR ACCESS TOKEN")
 ```
