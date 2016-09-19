@@ -3,22 +3,27 @@
 [![License](https://img.shields.io/cocoapods/l/DribbbleSwift.svg?style=flat)](http://cocoapods.org/pods/DribbbleSwift)
 [![Platform](https://img.shields.io/cocoapods/p/DribbbleSwift.svg?style=flat)](http://cocoapods.org/pods/DribbbleSwift)
 
-### Swift3 coming soon
-
 #Usage
 ###Register Dribble application
 https://dribbble.com/account/applications/new
 
 #Installation
 
+
+###Cocoapods
+
+### Swift 3
+```ruby
+pod 'DribbbleSwift', :git => "https://github.com/gkye/DribbbleSwift.git"
+```
+
+### Swift 2
+https://github.com/gkye/DribbbleSwift/tree/swift2
+
 ###Manual
 * Drag files into Xcode project
 * import DribbbleSwift
 
-###Cocoapods
-```ruby
-pod 'DribbbleSwift'
-```
 
 #Endpoints
 ##[GET](#examples-get)
