@@ -3,8 +3,6 @@
 [![License](https://img.shields.io/cocoapods/l/DribbbleSwift.svg?style=flat)](http://cocoapods.org/pods/DribbbleSwift)
 [![Platform](https://img.shields.io/cocoapods/p/DribbbleSwift.svg?style=flat)](http://cocoapods.org/pods/DribbbleSwift)
 
-### Swift3 coming soon
-
 #Usage
 ###Register Dribble application
 https://dribbble.com/account/applications/new
@@ -17,7 +15,7 @@ https://dribbble.com/account/applications/new
 
 ###Cocoapods
 ```ruby
-pod 'DribbbleSwift'
+pod 'DribbbleSwift', '~> 0.2.4'
 ```
 
 #Endpoints
