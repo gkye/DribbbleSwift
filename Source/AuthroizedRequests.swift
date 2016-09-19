@@ -9,7 +9,7 @@
 import Foundation
 
 extension ConfigDS{
-    public class func setOAuth2Token(token: String){
+    public class func setOAuth2Token(_ token: String){
         OAuth2Token = token
     }
 }
@@ -21,7 +21,7 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and a user object.
      */
     
-    public class func getAuthUser(completionHandler: (ClientReturn, user: UserDS?) -> ()) -> (){
+    public class func getAuthUser(_ completionHandler: @escaping (ClientReturn, _ user: UserDS?) -> ()) -> (){
         let url = "/user"
         var user: UserDS?
         HTTPRequest.request(url, parameters: nil, requestType: .GET, authRequest: true){
@@ -29,7 +29,7 @@ extension UserDS{
             if let json = api.json{
                 user = UserDS.init(json: json)
             }
-            completionHandler(api, user: user)
+            completionHandler(api, user)
         }
     }
     
@@ -41,18 +41,18 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of buckets.
      */
     
-    public class func getAuthUserBuckets(perPage perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, buckets: [BucketDS]?) -> ()) -> (){
+    public class func getAuthUserBuckets(perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ buckets: [BucketDS]?) -> ()) -> (){
         let url = "/user/buckets"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params, requestType: .GET, authRequest: true){
             api in
             var buckets: [BucketDS]?
             if let json = api.json{
                 buckets = BucketDS.initArray(json: json)
             }
-            completionHandler(api, buckets: buckets)
+            completionHandler(api, buckets)
         }
     }
     
@@ -63,18 +63,18 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse  and an array followers.
      */
     
-    public class func getAuthUserFollowers(perPage perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, followers: [FollowersDS]?) -> ()) -> (){
+    public class func getAuthUserFollowers(perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ followers: [FollowersDS]?) -> ()) -> (){
         let url = "/user/followers"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params, requestType: .GET, authRequest: true){
             api in
             var users: [FollowersDS]?
             if let json = api.json{
                 users = FollowersDS.initArray(json: json)
             }
-            completionHandler(api, followers: users)
+            completionHandler(api, users)
         }
     }
     
@@ -87,18 +87,18 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of followees.
      */
     
-    public class func getAuthUserFollowing(perPage perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, followees: [FolloweeDS]?) -> ()) -> (){
+    public class func getAuthUserFollowing(perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ followees: [FolloweeDS]?) -> ()) -> (){
         let url = "/user/following"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params, requestType: .GET, authRequest: true){
             api in
             var users: [FolloweeDS]?
             if let json = api.json{
                 users = FolloweeDS.initArray(json: json)
             }
-            completionHandler(api, followees: users)
+            completionHandler(api, users)
         }
     }
     
@@ -110,18 +110,18 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of shots.
      */
     
-    public class func userFollowingShots(perPage perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, shots: [ShotsDS]?) -> ()) -> (){
+    public class func userFollowingShots(perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ shots: [ShotsDS]?) -> ()) -> (){
         let url = "/user/following/shots"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params, requestType: .GET, authRequest: true){
             api in
             var shots: [ShotsDS]?
             if let json = api.json{
                 shots = ShotsDS.initArray(json: json)
             }
-            completionHandler(api, shots: shots)
+            completionHandler(api, shots)
         }
     }
     
@@ -131,12 +131,12 @@ extension UserDS{
      - parameter username:          username of user to be checked
      - parameter completionHandler: return NSError, JSON, NSURLResponse and returns true if status code = 204, else returns false if status code = 404
      */
-    public class func checkIfAuthUserFollowingUser(username: String, completionHandler: (ClientReturn, isFollowing: Bool) -> ()) -> (){
+    public class func checkIfAuthUserFollowingUser(_ username: String, completionHandler: @escaping (ClientReturn, _ isFollowing: Bool) -> ()) -> (){
         let url = "/user/following/\(username)"
         HTTPRequest.request(url, parameters: nil, authRequest: true){
             api in
             var following: Bool!
-            if let httpResponse = api.response as? NSHTTPURLResponse{
+            if let httpResponse = api.response as? HTTPURLResponse{
                 switch httpResponse.statusCode{
                 case 204:
                     following = true
@@ -144,7 +144,7 @@ extension UserDS{
                     following = false
                 }
             }
-            completionHandler(api, isFollowing: following)
+            completionHandler(api, following)
         }
     }
     
@@ -155,12 +155,12 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and returns true if status code = 204, else returns false if status code = 404
      */
     
-    public class func followUser(username: String, completionHandler: (ClientReturn, followed: Bool) -> ()) -> (){
+    public class func followUser(_ username: String, completionHandler: @escaping (ClientReturn, _ followed: Bool) -> ()) -> (){
         let url = "/users/\(username)/follow"
         HTTPRequest.request(url, parameters: nil, requestType: .PUT, authRequest: true){
             api in
             var following: Bool!
-            if let httpResponse = api.response as? NSHTTPURLResponse{
+            if let httpResponse = api.response as? HTTPURLResponse{
                 switch httpResponse.statusCode{
                 case 204:
                     following = true
@@ -168,7 +168,7 @@ extension UserDS{
                     following = false
                 }
             }
-            completionHandler(api, followed: following)
+            completionHandler(api, following)
         }
     }
     
@@ -180,12 +180,12 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and returns true if status code = 204, else returns false if status code = 404
      */
     
-    public class func unfollowUser(username: String, completionHandler: (ClientReturn, unfollowed: Bool) -> ()) -> (){
+    public class func unfollowUser(_ username: String, completionHandler: @escaping (ClientReturn, _ unfollowed: Bool) -> ()) -> (){
         let url = "/users/\(username)/follow"
         HTTPRequest.request(url, parameters: nil, requestType: .DELETE, authRequest: true){
             api in
             var following: Bool!
-            if let httpResponse = api.response as? NSHTTPURLResponse{
+            if let httpResponse = api.response as? HTTPURLResponse{
                 switch httpResponse.statusCode{
                 case 204:
                     following = true
@@ -193,7 +193,7 @@ extension UserDS{
                     following = false
                 }
             }
-            completionHandler(api, unfollowed: following)
+            completionHandler(api, following)
         }
     }
     
@@ -204,18 +204,18 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of buckets.
      
      */
-    public class func getAuthBuckets(perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, buckets: [BucketDS]?) -> ()) -> (){
+    public class func getAuthBuckets(_ perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ buckets: [BucketDS]?) -> ()) -> (){
         let url = "/user/buckets"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var buckets: [BucketDS]?
             if let json = api.json{
                 buckets = BucketDS.initArray(json: json)
             }
-            completionHandler(api, buckets: buckets)
+            completionHandler(api, buckets)
         }
     }
     
@@ -226,18 +226,18 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of shots.
      */
     
-    public class func getAuthLikes(perPage perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, likes: [UserLikesDS]?) -> ()) -> (){
+    public class func getAuthLikes(perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ likes: [UserLikesDS]?) -> ()) -> (){
         let url = "/user/likes"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params,authRequest: true){
             api in
             var shots: [UserLikesDS]?
             if let json = api.json{
                 shots = UserLikesDS.initArray(json: json)
             }
-            completionHandler(api, likes: shots)
+            completionHandler(api, shots)
         }
     }
     
@@ -248,18 +248,18 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of projects.
      */
     
-    public class func getAuthProjects(perPage perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, projects: [ProjectDS]?) -> ()) -> (){
+    public class func getAuthProjects(perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ projects: [ProjectDS]?) -> ()) -> (){
         let url = "/user/projects"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params, authRequest: true){
             api in
             var projects: [ProjectDS]?
             if let json = api.json{
                 projects = ProjectDS.initArray(json: json)
             }
-            completionHandler(api, projects: projects)
+            completionHandler(api, projects)
         }
     }
     
@@ -270,18 +270,18 @@ extension UserDS{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of shots.
      */
     
-    public class func getAuthShots(perPage perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, shots: [ShotsDS]?) -> ()) -> (){
+    public class func getAuthShots(perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ shots: [ShotsDS]?) -> ()) -> (){
         let url = "/user/shots"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params, authRequest: true){
             api in
             var projects: [ShotsDS]?
             if let json = api.json{
                 projects = ShotsDS.initArray(json: json)
             }
-            completionHandler(api, shots: projects)
+            completionHandler(api, projects)
         }
     }
     
@@ -291,7 +291,7 @@ extension UserDS{
      -parameter page: Current page of resource. Default = 1
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of teams.
      */
-    public class func getTeams(completionHandler: (ClientReturn, teams: [TeamDS]?) -> ()) -> (){
+    public class func getTeams(_ completionHandler: @escaping (ClientReturn, _ teams: [TeamDS]?) -> ()) -> (){
         let url = "/users/teams"
         HTTPRequest.request(url, parameters: nil){
             api in
@@ -299,7 +299,7 @@ extension UserDS{
             if let json = api.json{
                 projects = TeamDS.initArray(json: json)
             }
-            completionHandler(api, teams: projects)
+            completionHandler(api, projects)
         }
     }
     
@@ -314,14 +314,14 @@ extension ShotsDS{
      - parameter shotId:            id of shot to be liked
      - parameter completionHandler: return NSError, JSON, NSURLResponse, statusCode of request and boolean indicating weather request was succesful or not.
      */
-    public class func likeShot(shotId shotId: String, completionHandler: (ClientReturn, statusCode: Int?, success: Bool) -> ()) -> (){
+    public class func likeShot(shotId: String, completionHandler: @escaping (ClientReturn, _ statusCode: Int?, _ success: Bool) -> ()) -> (){
         let url = "/shots/\(shotId)/like"
         
         HTTPRequest.request(url, parameters: nil, requestType: .POST, authRequest: true){
             request in
             var liked: Bool!
             var statusCode: Int?
-            if let httpResponse = request.response as? NSHTTPURLResponse{
+            if let httpResponse = request.response as? HTTPURLResponse{
                 statusCode = httpResponse.statusCode
                 switch httpResponse.statusCode{
                 case 201:
@@ -330,7 +330,7 @@ extension ShotsDS{
                     liked = false
                 }
             }
-            completionHandler(request, statusCode: statusCode, success: liked)
+            completionHandler(request, statusCode, liked)
         }
     }
     
@@ -343,14 +343,14 @@ extension ShotsDS{
      - parameter shotId:            id of shot to be unliked
      - parameter completionHandler: return NSError, JSON, NSURLResponse, statusCode of request and boolean indicating weather request was succesful or not.
      */
-    public class func unlikeShot(shotId shotId: String, completionHandler: (ClientReturn, statusCode: Int?, unliked: Bool) -> ()) -> (){
+    public class func unlikeShot(shotId: String, completionHandler: @escaping (ClientReturn, _ statusCode: Int?, _ unliked: Bool) -> ()) -> (){
         let url = "/shots/\(shotId)/like"
         
         HTTPRequest.request(url, parameters: nil, requestType: .DELETE, authRequest: true){
             request in
             var unliked: Bool!
             var statusCode: Int?
-            if let httpResponse = request.response as? NSHTTPURLResponse{
+            if let httpResponse = request.response as? HTTPURLResponse{
                 statusCode = httpResponse.statusCode
                 switch httpResponse.statusCode{
                 case 204:
@@ -359,7 +359,7 @@ extension ShotsDS{
                     unliked = false
                 }
             }
-            completionHandler(request, statusCode: statusCode, unliked: unliked)
+            completionHandler(request, statusCode, unliked)
         }
     }
     
@@ -373,14 +373,14 @@ extension ShotsDS{
      - parameter shotId:            id of shot to be checked
      - parameter completionHandler: return NSError, JSON, NSURLResponse, statusCode of request and boolean indicating weather shot is liked or not.
      */
-    public class func checkIfShotLiked(shotId shotId: String, completionHandler: (ClientReturn, statusCode: Int?, liked: Bool) -> ()) -> (){
+    public class func checkIfShotLiked(shotId: String, completionHandler: @escaping (ClientReturn, _ statusCode: Int?, _ liked: Bool) -> ()) -> (){
         let url = "/shots/\(shotId)/like"
         
         HTTPRequest.request(url, parameters: nil, requestType: .GET, authRequest: true){
             request in
             var liked: Bool!
             var statusCode: Int?
-            if let httpResponse = request.response as? NSHTTPURLResponse{
+            if let httpResponse = request.response as? HTTPURLResponse{
                 statusCode = httpResponse.statusCode
                 switch httpResponse.statusCode{
                 case 200:
@@ -389,7 +389,7 @@ extension ShotsDS{
                     liked = false
                 }
             }
-            completionHandler(request, statusCode: statusCode, liked: liked)
+            completionHandler(request, statusCode, liked)
         }
     }
     

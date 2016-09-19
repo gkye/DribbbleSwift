@@ -11,8 +11,8 @@ import Foundation
 public struct ClientReturn{
     public var error: NSError?
     public var json: JSON?
-    public var response: NSURLResponse?
-    init(error: NSError?, json: JSON?, response: NSURLResponse?){
+    public var response: URLResponse?
+    init(error: NSError?, json: JSON?, response: URLResponse?){
         self.error = error
         self.json = json
         self.response = response
@@ -26,10 +26,10 @@ enum RequestType: String{
 
 class HTTPRequest{
     
-    class func request(url: String, parameters: [String: AnyObject]?, requestType: RequestType = .GET, authRequest: Bool = false, completionHandler: (ClientReturn) -> ()) -> (){
+    class func request(_ url: String, parameters: [String: AnyObject]?, requestType: RequestType = .GET, authRequest: Bool = false, completionHandler: @escaping (ClientReturn) -> ()) -> (){
         
         let baseURL = "https://api.dribbble.com/v1"+url
-        var url: NSURL!
+        var url: URL!
         var params: [String: AnyObject] = [:]
         var request: NSMutableURLRequest!
         
@@ -39,11 +39,11 @@ class HTTPRequest{
                 params = parameters!
             }
             if(!authRequest){
-                params["access_token"] = access_token
+                params["access_token"] = access_token as AnyObject?
             }
             let parameterString = params.stringFromHttpParameters()
-            url = NSURL(string: "\(baseURL)?\(parameterString)")!
-            request = NSMutableURLRequest(URL: url)
+            url = URL(string: "\(baseURL)?\(parameterString)")!
+            request = NSMutableURLRequest(url: url)
         default:
             break;
         }
@@ -51,11 +51,11 @@ class HTTPRequest{
         if(authRequest){
             if(requestType == .GET && parameters != nil){
                 let parameterString = parameters!.stringFromHttpParameters()
-                url = NSURL(string: "\(baseURL)?\(parameterString)")!
+                url = URL(string: "\(baseURL)?\(parameterString)")!
             }else{
-                url = NSURL(string: baseURL)
+                url = URL(string: baseURL)
             }
-            request = NSMutableURLRequest(URL: url)
+            request = NSMutableURLRequest(url: url)
             if(OAuth2Token != nil){
                 request.addValue("Bearer \(OAuth2Token)", forHTTPHeaderField: "Authorization")
             }else{
@@ -63,22 +63,24 @@ class HTTPRequest{
             }
         }
         
-        request.HTTPMethod = requestType.rawValue
+        request.httpMethod = requestType.rawValue
         //request.addValue("application/vnd.dribbble.v1.text+json", forHTTPHeaderField: "Accept")
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request){ data, response, error in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+      let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+            DispatchQueue.main.async(execute: { () -> Void in
                 if error == nil{
                     let json = JSON(data: data!)
-                    completionHandler(ClientReturn.init(error: error, json: json, response: response))
+                    completionHandler(ClientReturn.init(error: error as NSError?, json: json, response: response))
                     
                 }else{
                     print("Error -> \(error)")
                     print(error)
-                    completionHandler(ClientReturn.init(error: error, json: nil, response: response))
+                    completionHandler(ClientReturn.init(error: error as NSError?, json: nil, response: response))
                 }
             })
-        }
+        })
+      
+
         task.resume()
     }
 }
@@ -94,9 +96,9 @@ extension String {
     /// :returns: Returns percent-escaped string.
     
     func stringByAddingPercentEncodingForURLQueryValue() -> String? {
-        let allowedCharacters = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
+        let allowedCharacters = CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
         
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters)
+        return self.addingPercentEncoding(withAllowedCharacters: allowedCharacters)
     }
     
 }
@@ -114,10 +116,10 @@ extension Dictionary {
     func stringFromHttpParameters() -> String {
         let parameterArray = self.map { (key, value) -> String in
             let percentEscapedKey = (key as! String).stringByAddingPercentEncodingForURLQueryValue()!
-            let percentEscapedValue = (String(value)).stringByAddingPercentEncodingForURLQueryValue()!
+            let percentEscapedValue = (String(describing: value)).stringByAddingPercentEncodingForURLQueryValue()!
             return "\(percentEscapedKey)=\(percentEscapedValue)"
         }
         
-        return parameterArray.joinWithSeparator("&")
+        return parameterArray.joined(separator: "&")
     }
 }

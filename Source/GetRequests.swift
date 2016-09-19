@@ -12,8 +12,8 @@ import Foundation
 var access_token: String! = nil
 var OAuth2Token: String! = nil
 
-public class ConfigDS{
-    public class func setAccessToken(token: String!){
+open class ConfigDS{
+    open class func setAccessToken(_ token: String!){
         access_token = token
     }   
 }
@@ -27,7 +27,7 @@ protocol ArrayProtocol {
 
 extension ArrayProtocol {
     
-    static func initArray<T:ArrayProtocol>(json json: JSON) -> [T] {
+    static func initArray<T:ArrayProtocol>(json: JSON) -> [T] {
         var array = [T]()
         json.forEach(){
             array.append(T.init(json: $0.1))
@@ -62,10 +62,10 @@ public enum ShotSortDS: String{
 
 //Mark: Images
 
-public class ImagesDS{
-    public var hidpi: String?
-    public var normal: String!
-    public var teaser: String!
+open class ImagesDS{
+    open var hidpi: String?
+    open var normal: String!
+    open var teaser: String!
     
     init(json: JSON){
         hidpi = json["hidpi"].string
@@ -75,32 +75,32 @@ public class ImagesDS{
 }
 
 
-public class ShotsDS: ArrayProtocol{
-    public var id : Int!
-    public var title : String!
-    public var description : String?
-    public var width: Int!
-    public var height: Int!
-    public var images: ImagesDS!
-    public var views_count : Int!
-    public var likes_count :  Int!
-    public var comments_count : Int!
-    public var attachments_count: Int!
-    public var rebounds_count: Int!
-    public var buckets_count: Int!
-    public var created_at: String!
-    public var updated_at: String!
-    public var html_url: String!
-    public var attachments_url: String!
-    public var buckets_url: String!
-    public var comments_url: String!
-    public var likes_url: String!
-    public var projects_url: String!
-    public var rebounds_url: String!
-    public var animated: Bool!
-    public var tags: [String]?
-    public var user: UserDS!
-    public var team: TeamDS?
+open class ShotsDS: ArrayProtocol{
+    open var id : Int!
+    open var title : String!
+    open var description : String?
+    open var width: Int!
+    open var height: Int!
+    open var images: ImagesDS!
+    open var views_count : Int!
+    open var likes_count :  Int!
+    open var comments_count : Int!
+    open var attachments_count: Int!
+    open var rebounds_count: Int!
+    open var buckets_count: Int!
+    open var created_at: String!
+    open var updated_at: String!
+    open var html_url: String!
+    open var attachments_url: String!
+    open var buckets_url: String!
+    open var comments_url: String!
+    open var likes_url: String!
+    open var projects_url: String!
+    open var rebounds_url: String!
+    open var animated: Bool!
+    open var tags: [String]?
+    open var user: UserDS!
+    open var team: TeamDS?
     
     required public init(json: JSON){
         id = json["id"].int
@@ -143,23 +143,23 @@ public class ShotsDS: ArrayProtocol{
      - parameter completionHandler:   return NSError, JSON, NSURLResponse  and an array of shots.
      */
     
-    public class func getShots(perPage perPage: Int = 30, page: Int = 1, list: ShotListDS? = nil, sort: ShotSortDS? = nil, timeframe: ShotTimeFrameDS? = nil,date: String? = nil, completionHandler: (ClientReturn, shots: [ShotsDS]?) -> ()) -> (){
+    open class func getShots(perPage: Int = 30, page: Int = 1, list: ShotListDS? = nil, sort: ShotSortDS? = nil, timeframe: ShotTimeFrameDS? = nil,date: String? = nil, completionHandler: @escaping (ClientReturn, _ shots: [ShotsDS]?) -> ()) -> (){
         
         let url = "/shots"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         if(list != nil){
-            params["list"] = list!.rawValue
+            params["list"] = list!.rawValue as AnyObject?
         }
         if(sort != nil){
-            params["sort"] = sort!.rawValue
+            params["sort"] = sort!.rawValue as AnyObject?
         }
         if(timeframe != nil){
-            params["timeframe"] = timeframe?.rawValue
+            params["timeframe"] = timeframe?.rawValue as AnyObject?
         }
         if(date != nil){
-            params["date"] = date
+            params["date"] = date as AnyObject?
         }
         
         HTTPRequest.request(url, parameters: params){
@@ -168,7 +168,7 @@ public class ShotsDS: ArrayProtocol{
             if let json = api.json{
                 shots = ShotsDS.initArray(json: json)
             }
-            completionHandler(api, shots: shots)
+            completionHandler(api, shots)
         }
     }
     
@@ -180,11 +180,11 @@ public class ShotsDS: ArrayProtocol{
      - parameter shotID:            id assigned to shot
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of attachments
      */
-    public class func getAttachments(shotID shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, attachments: [AttachmentDS]?) -> ()) -> (){
+    open class func getAttachments(shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ attachments: [AttachmentDS]?) -> ()) -> (){
         let url = "/shots/\(shotID)/attachments"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         
         HTTPRequest.request(url, parameters: params){
             api in
@@ -192,7 +192,7 @@ public class ShotsDS: ArrayProtocol{
             if let json = api.json{
                 attachments = AttachmentDS.initArray(json: json)
             }
-            completionHandler(api, attachments: attachments)
+            completionHandler(api, attachments)
         }
     }
     
@@ -204,18 +204,18 @@ public class ShotsDS: ArrayProtocol{
      - parameter shotID: id assigned to shot
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of buckets
      */
-    public class func getBuckets(shotID shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, buckets: [BucketDS]?) -> ()) -> (){
+    open class func getBuckets(shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ buckets: [BucketDS]?) -> ()) -> (){
         let url = "/shots/\(shotID)/buckets"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var buckets: [BucketDS]?
             if let json = api.json{
                 buckets = BucketDS.initArray(json: json)
             }
-            completionHandler(api, buckets: buckets)
+            completionHandler(api, buckets)
         }
     }
     
@@ -228,18 +228,18 @@ public class ShotsDS: ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse  and an array of comments
      */
     
-    public class func getComments(shotID shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, comments: [CommentDS]?) -> ()) -> (){
+    open class func getComments(shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ comments: [CommentDS]?) -> ()) -> (){
         let url = "/shots/\(shotID)/comments"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var comments:[CommentDS]?
             if let json = api.json{
                 comments = CommentDS.initArray(json: json)
             }
-            completionHandler(api, comments: comments)
+            completionHandler(api, comments)
         }
     }
     
@@ -252,11 +252,11 @@ public class ShotsDS: ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse  and an array of likes
      */
     
-    public class func getLikes(shotID shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, likes: [ShotLikesDS]?) -> Void) -> (){
+    open class func getLikes(shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ likes: [ShotLikesDS]?) -> Void) -> (){
         let url = "/shots/\(shotID)/likes"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         
         HTTPRequest.request(url, parameters: params){
             api in
@@ -264,7 +264,7 @@ public class ShotsDS: ArrayProtocol{
             if let json = api.json{
                 likes = ShotLikesDS.initArray(json: json)
             }
-            completionHandler(api, likes: likes)
+            completionHandler(api, likes)
         }
     }
     
@@ -277,11 +277,11 @@ public class ShotsDS: ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse  and an array of projects
      */
     
-    public class func getProjects(shotID shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, projects: [ProjectDS]?) -> ()) -> (){
+    open class func getProjects(shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ projects: [ProjectDS]?) -> ()) -> (){
         let url = "/shots/\(shotID)/projects"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         
         HTTPRequest.request(url, parameters: params){
             api in
@@ -289,7 +289,7 @@ public class ShotsDS: ArrayProtocol{
             if let json = api.json{
                 project = ProjectDS.initArray(json: json)
             }
-            completionHandler(api, projects: project)
+            completionHandler(api, project)
         }
     }
     
@@ -303,11 +303,11 @@ public class ShotsDS: ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse  and an array of rebounds.
      */
     
-    public class func getRebounds(shotID shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, rebounds: [ShotsDS]?) -> ()) -> (){
+    open class func getRebounds(shotID: Int, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ rebounds: [ShotsDS]?) -> ()) -> (){
         let url = "/shots/\(shotID)/rebounds"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         
         HTTPRequest.request(url, parameters: params){
             api in
@@ -315,44 +315,44 @@ public class ShotsDS: ArrayProtocol{
             if let json = api.json{
                 shots = ShotsDS.initArray(json: json)
             }
-            completionHandler(api, rebounds: shots)
+            completionHandler(api, shots)
         }
     }
 }
 
 //MARK: User/Team Model
 
-public class UserAndTeamBaseModel{
-    public var id: Int!
-    public var name: String!
-    public var username: String!
-    public var html_url: String!
-    public var avatar_url: String!
-    public var bio: String!
-    public var location: String!
-    public var links: (web: String?, twitter: String?)
-    public var buckets_count: Int!
-    public var comments_received_count: Int!
-    public var followers_count: Int!
-    public var followings_count: Int!
-    public var likes_count: Int!
-    public var likes_received_count: Int!
-    public var projects_count: Int!
-    public var rebounds_received_count: Int!
-    public var shots_count: Int!
-    public var can_upload_shot: Bool!
-    public var type: String!
-    public var pro: Bool!
-    public var buckets_url: String!
-    public var followers_url: String!
-    public var following_url: String!
-    public var likes_url: String!
-    public var projects_url: String!
-    public var shots_url: String!
-    public var teams_url: String!
-    public var created_at: String!
-    public var updated_at: String!
-    public var teams_count: Int!
+open class UserAndTeamBaseModel{
+    open var id: Int!
+    open var name: String!
+    open var username: String!
+    open var html_url: String!
+    open var avatar_url: String!
+    open var bio: String!
+    open var location: String!
+    open var links: (web: String?, twitter: String?)
+    open var buckets_count: Int!
+    open var comments_received_count: Int!
+    open var followers_count: Int!
+    open var followings_count: Int!
+    open var likes_count: Int!
+    open var likes_received_count: Int!
+    open var projects_count: Int!
+    open var rebounds_received_count: Int!
+    open var shots_count: Int!
+    open var can_upload_shot: Bool!
+    open var type: String!
+    open var pro: Bool!
+    open var buckets_url: String!
+    open var followers_url: String!
+    open var following_url: String!
+    open var likes_url: String!
+    open var projects_url: String!
+    open var shots_url: String!
+    open var teams_url: String!
+    open var created_at: String!
+    open var updated_at: String!
+    open var teams_count: Int!
 
     init(json: JSON){
         
@@ -390,11 +390,11 @@ public class UserAndTeamBaseModel{
 
 //MARK: FollowersDS
 
-public class FollowersDS: ArrayProtocol{
+open class FollowersDS: ArrayProtocol{
     
-    public var id: Int!
-    public var created_at: String!
-    public var follower: UserDS!
+    open var id: Int!
+    open var created_at: String!
+    open var follower: UserDS!
 
     required public init(json: JSON){
         id = json["id"].int
@@ -404,11 +404,11 @@ public class FollowersDS: ArrayProtocol{
 }
 
 //MARK: FolloweeDS
-public class FolloweeDS: ArrayProtocol{
+open class FolloweeDS: ArrayProtocol{
     
-    public var id: Int!
-    public var created_at: String!
-    public var followee: UserDS!
+    open var id: Int!
+    open var created_at: String!
+    open var followee: UserDS!
     
     required public init(json: JSON){
         id = json["id"].int
@@ -419,9 +419,9 @@ public class FolloweeDS: ArrayProtocol{
 }
 
 //MARK: UserDS
-public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
+open class UserDS: UserAndTeamBaseModel, ArrayProtocol{
     
-    public var team: TeamDS?
+    open var team: TeamDS?
     override required public init(json: JSON) {
         super.init(json: json)
         
@@ -437,7 +437,7 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and a user object.
      */
     
-    public class func getUser(username: String, completionHandler: (ClientReturn, user: UserDS?) -> ()) -> (){
+    open class func getUser(_ username: String, completionHandler: @escaping (ClientReturn, _ user: UserDS?) -> ()) -> (){
         let url = "/users/\(username)"
         HTTPRequest.request(url, parameters: nil){
             api in
@@ -445,7 +445,7 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
             if let json = api.json{
                 user = UserDS.init(json: json)
             }
-            completionHandler(api, user: user)
+            completionHandler(api, user)
         }
     }
     
@@ -457,18 +457,18 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of buckets.
      
      */
-    public class func getBuckets(username: String, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, buckets: [BucketDS]?) -> ()) -> (){
+    open class func getBuckets(_ username: String, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ buckets: [BucketDS]?) -> ()) -> (){
         let url = "/users/\(username)/buckets"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var buckets: [BucketDS]?
             if let json = api.json{
                 buckets = BucketDS.initArray(json: json)
             }
-            completionHandler(api, buckets: buckets)
+            completionHandler(api, buckets)
         }
     }
     
@@ -481,18 +481,18 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
      
      */
     
-    public class func getFollowers(username: String, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, followers: [FollowersDS]?) -> ()) -> (){
+    open class func getFollowers(_ username: String, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ followers: [FollowersDS]?) -> ()) -> (){
         let url = "/users/\(username)/followers"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var users: [FollowersDS]?
             if let json = api.json{
                 users = FollowersDS.initArray(json: json)
             }
-            completionHandler(api, followers: users)
+            completionHandler(api, users)
         }
     }
     
@@ -505,18 +505,18 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
      
      */
     
-    public class func getFollowing(username: String, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, followees: [FolloweeDS]?) -> ()) -> (){
+    open class func getFollowing(_ username: String, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ followees: [FolloweeDS]?) -> ()) -> (){
         let url = "/users/\(username)/following"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var users: [FolloweeDS]?
             if let json = api.json{
                 users = FolloweeDS.initArray(json: json)
             }
-            completionHandler(api, followees: users)
+            completionHandler(api, users)
         }
     }
     
@@ -527,12 +527,12 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
      - parameter targetUser:        username of user to be checked if following
      - parameter completionHandler: return NSError, JSON, NSURLResponse and returns true if status code = 204, else returns false if status code = 404
      */
-    public class func checkIfUserFollowingUser(username: String, targetUser: String, completionHandler: (ClientReturn, isFollowing: Bool) -> ()) -> (){
+    open class func checkIfUserFollowingUser(_ username: String, targetUser: String, completionHandler: @escaping (ClientReturn, _ isFollowing: Bool) -> ()) -> (){
         let url = "/users/\(username)/following/\(targetUser)"
         HTTPRequest.request(url, parameters: nil){
             api in
             var following: Bool!
-            if let httpResponse = api.response as? NSHTTPURLResponse{
+            if let httpResponse = api.response as? HTTPURLResponse{
                 switch httpResponse.statusCode{
                 case 204:
                     following = true
@@ -540,7 +540,7 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
                     following = false
                 }
             }
-            completionHandler(api, isFollowing: following)
+            completionHandler(api, following)
         }
         
     }
@@ -553,18 +553,18 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of shots.
      */
     
-    public class func getLikes(username: String, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, likes: [UserLikesDS]?) -> ()) -> (){
+    open class func getLikes(_ username: String, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ likes: [UserLikesDS]?) -> ()) -> (){
         let url = "/users/\(username)/likes"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var shots: [UserLikesDS]?
             if let json = api.json{
                 shots = UserLikesDS.initArray(json: json)
             }
-            completionHandler(api, likes: shots)
+            completionHandler(api, shots)
         }
     }
     
@@ -577,18 +577,18 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of projects.
      */
     
-    public class func getProjects(username: String, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, projects: [ProjectDS]?) -> ()) -> (){
+    open class func getProjects(_ username: String, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ projects: [ProjectDS]?) -> ()) -> (){
         let url = "/users/\(username)/projects"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var projects: [ProjectDS]?
             if let json = api.json{
                 projects = ProjectDS.initArray(json: json)
             }
-            completionHandler(api, projects: projects)
+            completionHandler(api, projects)
         }
     }
     
@@ -600,18 +600,18 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of shots.
      */
     
-    public class func getShots(username: String, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, shots: [ShotsDS]?) -> ()) -> (){
+    open class func getShots(_ username: String, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ shots: [ShotsDS]?) -> ()) -> (){
         let url = "/users/\(username)/shots"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var projects: [ShotsDS]?
             if let json = api.json{
                 projects = ShotsDS.initArray(json: json)
             }
-            completionHandler(api, shots: projects)
+            completionHandler(api, projects)
         }
     }
     
@@ -623,7 +623,7 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of teams.
      */
     
-    public class func getTeams(username: String, completionHandler: (ClientReturn, teams: [TeamDS]?) -> ()) -> (){
+    open class func getTeams(_ username: String, completionHandler: @escaping (ClientReturn, _ teams: [TeamDS]?) -> ()) -> (){
         let url = "/users/\(username)/teams"
         HTTPRequest.request(url, parameters: nil){
             api in
@@ -631,7 +631,7 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
             if let json = api.json{
                 projects = TeamDS.initArray(json: json)
             }
-            completionHandler(api, teams: projects)
+            completionHandler(api, projects)
         }
     }
     
@@ -639,11 +639,11 @@ public class UserDS: UserAndTeamBaseModel, ArrayProtocol{
 
 //Mark: Team
 
-public class TeamDS: UserAndTeamBaseModel, ArrayProtocol{
+open class TeamDS: UserAndTeamBaseModel, ArrayProtocol{
     
-    public var members_count: Int!
-    public var members_url: String!
-    public var team_shots_url: String!
+    open var members_count: Int!
+    open var members_url: String!
+    open var team_shots_url: String!
     
     public required override init(json: JSON){
         super.init(json: json)
@@ -660,18 +660,18 @@ public class TeamDS: UserAndTeamBaseModel, ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of users.
      */
     
-    public class func getTeamMembers(teamName: String, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, members: [UserDS]?) -> ()) -> (){
+    open class func getTeamMembers(_ teamName: String, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ members: [UserDS]?) -> ()) -> (){
         let url = "/teams/\(teamName)/members"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var members: [UserDS]?
             if let json = api.json{
                 members = UserDS.initArray(json: json)
             }
-            completionHandler(api, members: members)
+            completionHandler(api, members)
         }
     }
     
@@ -684,18 +684,18 @@ public class TeamDS: UserAndTeamBaseModel, ArrayProtocol{
      - parameter completionHandler: return NSError, JSON, NSURLResponse and an array of shots.
      */
     
-    public class func getTeamShots(teamName: String, perPage: Int = 30, page: Int = 1, completionHandler: (ClientReturn, shots: [ShotsDS]?) -> ()) -> (){
+    open class func getTeamShots(_ teamName: String, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (ClientReturn, _ shots: [ShotsDS]?) -> ()) -> (){
         let url = "/teams/\(teamName)/shots"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params){
             api in
             var shots: [ShotsDS]?
             if let json = api.json{
                 shots = ShotsDS.initArray(json: json)
             }
-            completionHandler(api, shots: shots)
+            completionHandler(api, shots)
         }
         
     }
@@ -704,10 +704,10 @@ public class TeamDS: UserAndTeamBaseModel, ArrayProtocol{
 //Mark: Likes
 
 //MARK: ShotLikes
-public class ShotLikesDS: ArrayProtocol{
-    public var id: Int!
-    public var created_at: String!
-    public var user: UserDS!
+open class ShotLikesDS: ArrayProtocol{
+    open var id: Int!
+    open var created_at: String!
+    open var user: UserDS!
     
     public required init(json: JSON){
         id = json["id"].int
@@ -717,10 +717,10 @@ public class ShotLikesDS: ArrayProtocol{
 }
 
 //MARK: UserLikes
-public class UserLikesDS: ArrayProtocol {
-    public var id: Int!
-    public var created_at: String!
-    public var shot: ShotsDS!
+open class UserLikesDS: ArrayProtocol {
+    open var id: Int!
+    open var created_at: String!
+    open var shot: ShotsDS!
     
     public required init(json: JSON){
         id = json["id"].int
@@ -731,15 +731,15 @@ public class UserLikesDS: ArrayProtocol {
 
 //Mark: Comments
 
-public class CommentDS: ArrayProtocol{
+open class CommentDS: ArrayProtocol{
     
-    public var id: Int!
-    public var body: String!
-    public var likes_count: Int!
-    public var likes_url: String!
-    public var created_at: String!
-    public var updated_at: String!
-    public var user: UserDS!
+    open var id: Int!
+    open var body: String!
+    open var likes_count: Int!
+    open var likes_url: String!
+    open var created_at: String!
+    open var updated_at: String!
+    open var user: UserDS!
     
     public required init(json: JSON){
         id = json["id"].int
@@ -754,15 +754,15 @@ public class CommentDS: ArrayProtocol{
 
 //Mark: Attachment
 
-public class AttachmentDS: ArrayProtocol{
+open class AttachmentDS: ArrayProtocol{
     
-    public var id: Int!
-    public var url: String!
-    public var thumbnail_url: String!
-    public var size: Int!
-    public var content_type: String!
-    public var views_count: Int!
-    public var created_at: String!
+    open var id: Int!
+    open var url: String!
+    open var thumbnail_url: String!
+    open var size: Int!
+    open var content_type: String!
+    open var views_count: Int!
+    open var created_at: String!
     
     public required init(json: JSON){
         id = json["id"].int
@@ -778,15 +778,15 @@ public class AttachmentDS: ArrayProtocol{
 
 //Mark: Bucket
 
-public class BucketDS: ArrayProtocol{
+open class BucketDS: ArrayProtocol{
     
-    public var id: Int!
-    public var name: String!
-    public var description: String?
-    public var shots_count: Int!
-    public var created_at: String!
-    public var updated_at: String!
-    public var user: UserDS!
+    open var id: Int!
+    open var name: String!
+    open var description: String?
+    open var shots_count: Int!
+    open var created_at: String!
+    open var updated_at: String!
+    open var user: UserDS!
     
     public required init(json: JSON){
         id = json["id"].int
@@ -804,7 +804,7 @@ public class BucketDS: ArrayProtocol{
      - parameter completionHandler:   return NSError, JSON, NSURLResponse and a bucket object
      */
     
-    public class func getBucket(bucketId bucketId: Int, completionHandler: (clientReturn: ClientReturn?, bucket: BucketDS?) -> ()) -> (){
+    open class func getBucket(bucketId: Int, completionHandler: @escaping (_ clientReturn: ClientReturn?, _ bucket: BucketDS?) -> ()) -> (){
         let url = "/buckets/\(bucketId)"
         HTTPRequest.request(url, parameters: nil, completionHandler: {
             api in
@@ -812,7 +812,7 @@ public class BucketDS: ArrayProtocol{
             if let json = api.json{
                 bucket = BucketDS.init(json: json)
             }
-            completionHandler(clientReturn: api, bucket: bucket)
+            completionHandler(api, bucket)
             
         })
     }
@@ -825,18 +825,18 @@ public class BucketDS: ArrayProtocol{
      - parameter completionHandler:   return NSError, JSON, NSURLResponse and an array of shots
      */
     
-    public class func getShots(bucketId bucketId: Int, perPage: Int = 30, page: Int = 1, completionHandler: (clientReturn: ClientReturn?, shots: [ShotsDS]?) -> ()) -> (){
+    open class func getShots(bucketId: Int, perPage: Int = 30, page: Int = 1, completionHandler: @escaping (_ clientReturn: ClientReturn?, _ shots: [ShotsDS]?) -> ()) -> (){
         let url = "/buckets/\(bucketId)/shots"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params, completionHandler: {
             api in
             var shots: [ShotsDS]?
             if let json = api.json{
                 shots = ShotsDS.initArray(json: json)
             }
-            completionHandler(clientReturn: api, shots: shots)
+            completionHandler(api, shots)
             
         })
     }
@@ -845,15 +845,15 @@ public class BucketDS: ArrayProtocol{
 
 //Mark: Project
 
-public class ProjectDS: ArrayProtocol{
+open class ProjectDS: ArrayProtocol{
     
-    public var id: Int!
-    public var name: String!
-    public var description: String?
-    public var shots_count: Int!
-    public var created_at: String!
-    public var updated_at: String!
-    public var user: UserDS!
+    open var id: Int!
+    open var name: String!
+    open var description: String?
+    open var shots_count: Int!
+    open var created_at: String!
+    open var updated_at: String!
+    open var user: UserDS!
     
     public required init(json: JSON){
         id = json["id"].int
@@ -871,7 +871,7 @@ public class ProjectDS: ArrayProtocol{
      - parameter completionHandler:   return NSError, JSON, NSURLResponse and a project object
      */
     
-    public class func getProject(projectId projectId: Int, completionHandler: (clientReturn: ClientReturn?, project: ProjectDS?) -> ()) -> (){
+    open class func getProject(projectId: Int, completionHandler: @escaping (_ clientReturn: ClientReturn?, _ project: ProjectDS?) -> ()) -> (){
         let url = "/projects/\(projectId)"
         HTTPRequest.request(url, parameters: nil, completionHandler: {
             api in
@@ -879,7 +879,7 @@ public class ProjectDS: ArrayProtocol{
             if let json = api.json{
                 bucket = ProjectDS.init(json: json)
             }
-            completionHandler(clientReturn: api, project: bucket)
+            completionHandler(api, bucket)
             
         })
     }
@@ -892,18 +892,18 @@ public class ProjectDS: ArrayProtocol{
      - parameter completionHandler:   return NSError, JSON, NSURLResponse and an array of shots
      */
     
-    public class func getShots(projectID projectId: Int, page: Int = 0, perPage: Int = 30, completionHandler: (clientReturn: ClientReturn?, shots: [ShotsDS]?) -> ()) -> (){
+    open class func getShots(projectID projectId: Int, page: Int = 0, perPage: Int = 30, completionHandler: @escaping (_ clientReturn: ClientReturn?, _ shots: [ShotsDS]?) -> ()) -> (){
         let url = "/projects/\(projectId)/shots"
         var params: [String: AnyObject] = [:]
-        params["per_page"] = perPage
-        params["page"] = page
+        params["per_page"] = perPage as AnyObject?
+        params["page"] = page as AnyObject?
         HTTPRequest.request(url, parameters: params, completionHandler: {
             api in
             var shots: [ShotsDS]?
             if let json = api.json{
                 shots = ShotsDS.initArray(json: json)
             }
-            completionHandler(clientReturn: api, shots: shots)
+            completionHandler(api, shots)
             
         })
     }
