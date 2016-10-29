@@ -64,7 +64,7 @@ class HTTPRequest{
         }
         
         request.httpMethod = requestType.rawValue
-        //request.addValue("application/vnd.dribbble.v1.text+json", forHTTPHeaderField: "Accept")
+        request.addValue("application/vnd.dribbble.v1.text+json", forHTTPHeaderField: "Accept")
         
       let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
             DispatchQueue.main.async(execute: { () -> Void in
