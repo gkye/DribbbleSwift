@@ -105,7 +105,7 @@ open class ShotsDS: ArrayProtocol{
     required public init(json: JSON){
         id = json["id"].int
         title = json["title"].string
-        description = json["description"].string
+        description = json["description_text"].string
         width = json["width"].int
         height = json["height"].int
         images = ImagesDS.init(json: json["images"])
