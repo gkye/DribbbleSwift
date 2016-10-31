@@ -46,36 +46,36 @@ https://github.com/gkye/DribbbleSwift/tree/swift2
 #Buckets :pouch:
 ###Get a bucket
 ```swift
-        BucketDS.getBucket(bucketId: 377694){
-            bucket in
-            print(bucket.bucket?.name)
-            print(bucket.bucket?.user.username)
-        }
+    BucketDS.getBucket(bucketId: 377694){
+      apiData, bucket in
+      print(bucket?.name)
+      print(bucket?.user.username)
+    }
 ```
 ###List shots for a bucket
 ```swift
-        BucketDS.getShots(bucketId: 377694){
-            shots in
-            print(shots.shots?.count)
-            print(shots.shots?[0].title)
-        }
+    BucketDS.getShots(bucketId: 377694){
+      apiData, shots in
+      print(shots?.count)
+      print(shots?[0].title)
+    }
 ```
 # Project :page_facing_up:
 ###Get a project
 ```swift
-      ProjectDS.getProject(projectId: 3){
-            project in
-            print(project.project?.name)
-            print(project.project?.user.username)
-        }
+     ProjectDS.getProject(projectId: 3){
+      apiData, project in
+      print(project?.name)
+      print(project?.user.username)
+    }
 ```
 ###List shots for a project
 ```swift
-        ProjectDS.getShots(projectId: 3){
-            shots in
-            print(shots.shots?.count)
-            print(shots.shots?[0].title)
-        }
+    ProjectDS.getShots(projectID: 3){
+      apiData, shots in
+      print(shots?.count)
+      print(shots?[0].title)
+    }
 ```
 
 #Shots :camera:
@@ -93,69 +93,69 @@ Parameters
      - parameter completionHandler:   return NSError, JSON and an array of shots.
      */
      
-        ShotsDS.getShots(perPage: 50, list: .animated, sort: .recent){
-            shotz in
-            print(shotz.shots?.count)
-            print(shotz.shots?[0].title)
-        }
+    ShotsDS.getShots(perPage: 50, list: .animated, sort: .recent){
+      apiData, shots in
+      print(shots?.count)
+      print(shots?[0].title)
+    }
 ```
 
 ###List attachments for a shot
  ```swift
-        ShotsDS.getAttachments(shotID: 2694049){
-            atts in
-            print(atts.0.json)
-            print(atts.attachments?[0].url)
-        }
+    ShotsDS.getAttachments(shotID: 2694049){
+      apiData, atts in
+      print(atts?[0].url)
+      print(atts?[0].thumbnail_url)
+    }
 ```
 ###List buckets for a shot
 ```swift
-        ShotsDS.getBuckets(shotID: 2694049, perPage: 50){
-            bucks in
-            print(bucks.buckets?[0].description)
-        }
+   ShotsDS.getBuckets(shotID: 2694049, perPage: 50){
+      apiData, buckets in
+      print(buckets?[0].description)
+    }
 ```  
 ###List comments for a shot
 ```swift
-        ShotsDS.getComments(shotID: 2694049, perPage: 50){
-            cmnts in
-            print(cmnts.comments?[0].body)
-        }
+    ShotsDS.getComments(shotID: 2694049, perPage: 50){
+      apiData, comments in
+      print(comments?[0].body)
+    }
 ```
 ###List likes for a shot
 ```swift
         ShotsDS.getLikes(shotID: 2694049, perPage: 50){
-            lks in
-            print(lks.likes?[0].created_at)
-            print(lks.likes?[0].user.username)
+            apiData, likes in
+            print(likes?[0].created_at)
+            print(likes?[0].user.username)
         }
 ```
 ###List projects for a shot
 ```swift
         ShotsDS.getProjects(shotID: 2698163, perPage: 50){
-            projs in
-            print(projs.projects?[0].name)
+            apiData, projs in
+            print(projs?[0].name)
         }
 ```
 ###List rebounds for a shot
 ```swift
         ShotsDS.getRebounds(shotID: 2691323, perPage: 50){
-            rbs in
-            print(rbs.rebounds?[0].title)
+            apiData, rbs in
+            print(rbs?[0].title)
         }
 ```
 #Team :busts_in_silhouette:
 ###List a team’s members
 ```swift
         TeamDS.getTeamMembers("Dribbble"){
-            api in
-            print(api.members?[0].username)
+            apiData, memebers in
+            print(members?[0].username)
         }
 ```
 ```swift
         TeamDS.getTeamShots("Dribbble", perPage: 10, page: 1){
-            api in
-            print(api.shots?[0].title)
+            apiData, shots in
+            print(shots?[0].title)
         }
 ```
 
@@ -163,15 +163,15 @@ Parameters
 ###Get a single user
 ```swift
         UserDS.getUser("Ramotion"){
-            api in
-            print(api.user?.bio)
+            apiData, user in
+            print(user?.bio)
         }
 ```
 ###List a user’s buckets
 ```swift
         UserDS.getBuckets("SergeyValiukh"){
-            api in
-            print(api.buckets?[0].name)
+            apiData, buckets in
+            print(buckets?[0].name)
         }
 ```
 ###List followers of a user
