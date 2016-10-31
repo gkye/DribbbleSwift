@@ -294,26 +294,25 @@ ConfigDS.setOAuth2Token("OAUTH2 TOKEN RECEIVED")
 
 ###Like a shot
 ```swift
- ShotsDS.likeShot(shotId: "2678120"){
-            api in
-            print(api.statusCode)
-            print(api.success)
-        }
+    ShotsDS.likeShot(shotId: "2678120"){
+      apiData, returnCode, status in
+      print(returnCode) //
+      print(status)
+    }
 ```
 ###Unlike a shot
 ```swift
-ShotsDS.unlikeShot(shotId: "2678120"){
-            api in
-            print(api.statusCode)
-            print(api.unliked)
-            
-        }
+    ShotsDS.unlikeShot(shotId: "2678120"){
+      apiData, returnCode, status in
+      print(returnCode) //
+      print(status)
+    }
 ```
 ###Checking if user liked a shot
 ```swift
-ShotsDS.checkIfShotLiked(shotId: "2687276"){
-            api in
-            print(api.statusCode)
-            print(api.liked)
-        }
+  ShotsDS.checkIfShotLiked(shotId: "2687276"){
+      apiData, returnCode, status in
+      print(returnCode) //
+      print(status)
+    }
 ```
