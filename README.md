@@ -46,36 +46,36 @@ https://github.com/gkye/DribbbleSwift/tree/swift2
 #Buckets :pouch:
 ###Get a bucket
 ```swift
-        BucketDS.getBucket(bucketId: 377694){
-            bucket in
-            print(bucket.bucket?.name)
-            print(bucket.bucket?.user.username)
-        }
+    BucketDS.getBucket(bucketId: 377694){
+      apiData, bucket in
+      print(bucket?.name)
+      print(bucket?.user.username)
+    }
 ```
 ###List shots for a bucket
 ```swift
-        BucketDS.getShots(bucketId: 377694){
-            shots in
-            print(shots.shots?.count)
-            print(shots.shots?[0].title)
-        }
+    BucketDS.getShots(bucketId: 377694){
+      apiData, shots in
+      print(shots?.count)
+      print(shots?[0].title)
+    }
 ```
 # Project :page_facing_up:
 ###Get a project
 ```swift
-      ProjectDS.getProject(projectId: 3){
-            project in
-            print(project.project?.name)
-            print(project.project?.user.username)
-        }
+     ProjectDS.getProject(projectId: 3){
+      apiData, project in
+      print(project?.name)
+      print(project?.user.username)
+    }
 ```
 ###List shots for a project
 ```swift
-        ProjectDS.getShots(projectId: 3){
-            shots in
-            print(shots.shots?.count)
-            print(shots.shots?[0].title)
-        }
+    ProjectDS.getShots(projectID: 3){
+      apiData, shots in
+      print(shots?.count)
+      print(shots?[0].title)
+    }
 ```
 
 #Shots :camera:
@@ -93,69 +93,69 @@ Parameters
      - parameter completionHandler:   return NSError, JSON and an array of shots.
      */
      
-        ShotsDS.getShots(perPage: 50, list: .animated, sort: .recent){
-            shotz in
-            print(shotz.shots?.count)
-            print(shotz.shots?[0].title)
-        }
+    ShotsDS.getShots(perPage: 50, list: .animated, sort: .recent){
+      apiData, shots in
+      print(shots?.count)
+      print(shots?[0].title)
+    }
 ```
 
 ###List attachments for a shot
  ```swift
-        ShotsDS.getAttachments(shotID: 2694049){
-            atts in
-            print(atts.0.json)
-            print(atts.attachments?[0].url)
-        }
+    ShotsDS.getAttachments(shotID: 2694049){
+      apiData, atts in
+      print(atts?[0].url)
+      print(atts?[0].thumbnail_url)
+    }
 ```
 ###List buckets for a shot
 ```swift
-        ShotsDS.getBuckets(shotID: 2694049, perPage: 50){
-            bucks in
-            print(bucks.buckets?[0].description)
-        }
+   ShotsDS.getBuckets(shotID: 2694049, perPage: 50){
+      apiData, buckets in
+      print(buckets?[0].description)
+    }
 ```  
 ###List comments for a shot
 ```swift
-        ShotsDS.getComments(shotID: 2694049, perPage: 50){
-            cmnts in
-            print(cmnts.comments?[0].body)
-        }
+    ShotsDS.getComments(shotID: 2694049, perPage: 50){
+      apiData, comments in
+      print(comments?[0].body)
+    }
 ```
 ###List likes for a shot
 ```swift
         ShotsDS.getLikes(shotID: 2694049, perPage: 50){
-            lks in
-            print(lks.likes?[0].created_at)
-            print(lks.likes?[0].user.username)
+            apiData, likes in
+            print(likes?[0].created_at)
+            print(likes?[0].user.username)
         }
 ```
 ###List projects for a shot
 ```swift
         ShotsDS.getProjects(shotID: 2698163, perPage: 50){
-            projs in
-            print(projs.projects?[0].name)
+            apiData, projs in
+            print(projs?[0].name)
         }
 ```
 ###List rebounds for a shot
 ```swift
         ShotsDS.getRebounds(shotID: 2691323, perPage: 50){
-            rbs in
-            print(rbs.rebounds?[0].title)
+            apiData, rbs in
+            print(rbs?[0].title)
         }
 ```
 #Team :busts_in_silhouette:
 ###List a team’s members
 ```swift
         TeamDS.getTeamMembers("Dribbble"){
-            api in
-            print(api.members?[0].username)
+            apiData, memebers in
+            print(members?[0].username)
         }
 ```
 ```swift
         TeamDS.getTeamShots("Dribbble", perPage: 10, page: 1){
-            api in
-            print(api.shots?[0].title)
+            apiData, shots in
+            print(shots?[0].title)
         }
 ```
 
@@ -163,72 +163,72 @@ Parameters
 ###Get a single user
 ```swift
         UserDS.getUser("Ramotion"){
-            api in
-            print(api.user?.bio)
+            apiData, user in
+            print(user?.bio)
         }
 ```
 ###List a user’s buckets
 ```swift
         UserDS.getBuckets("SergeyValiukh"){
-            api in
-            print(api.buckets?[0].name)
+            apiData, buckets in
+            print(buckets?[0].name)
         }
 ```
 ###List followers of a user
 ```swift
         UserDS.getFollowers("simplebits", page: 1){
-            api in
-            print(api.followers?[0].follower.username)
-            print(api.followers?[0].follower.name)
+            apiData, followers in
+            print(followers?[0].follower.username)
+            print(followers?[0].follower.name)
         }
 ```
 ###List users followed by a user
 ```swift
         UserDS.getFollowing("simplebits", perPage: 20, page: 1){
-            api in
-            print(api.followees?[0].followee.username)
-            print(api.followees?[0].followee.bio)
+            apiData, followees in
+            print(followees?[0].followee.username)
+            print(followees?[0].followee.bio)
             
         }
 ```
 ###Check if one user is following another
 *returns true if following, else false.*
 ```swift
-        UserDS.checkIfUserFollowingUser("dannpetty", targetUser: "SergeyValiukh"){
-            api in
-            print(api.isFollowing)
-        }
+    UserDS.checkIfUserFollowingUser("dannpetty", targetUser: "SergeyValiukh"){
+      apiData, followingStatus in
+      print(followingStatus)
+    }
 ```
 ###List shot likes for a user
 ```swift
         UserDS.getLikes("simplebits", perPage: 20, page: 1){
-            api in
-            print(api.likes?[0].shot.title)
-            print(api.likes?[0].shot.user.username)
+            apiData, likes in
+            print(likes?[0].shot.title)
+            print(likes?[0].shot.user.username)
         }
 ```
 ###List a user’s projects
 ```swift
         UserDS.getProjects("simplebits", perPage: 10, page: 1){
-            api in
-            print(api.projects?[0].name)
+            apiData, projects in
+            print(projects?[0].name)
         }
 ```
 ###List shots for a user
 ```swift
         
         UserDS.getShots("simplebits", perPage: 10, page: 3){
-            api in
-            print(api.shots?[0].title)
+            apiData, shots in
+            print(shots?[0].title)
         }
 ```
 
 ###List a user’s teams
 ```swift
         UserDS.getTeams("simplebits"){
-            api in
-            print(api.teams?[0].name)
-            print(api.teams?[0].members_count)
+            apiData, teams in
+            print(teams?[0].name)
+            print(teams?[0].members_count)
         }
 ```
 
@@ -242,51 +242,51 @@ ConfigDS.setOAuth2Token("OAUTH2 TOKEN RECEIVED")
 #Users
 ###Get the authenticated user
 ```swift
- UserDS.getAuthUser(){ user in  }
+ UserDS.getAuthUser(){ apiData, user in  }
 ```
 ###List a user’s buckets
 ```swift
- UserDS.getAuthUserBuckets(perPage: 10, page: 1){bks in print(bks.0.json)   }
+ UserDS.getAuthUserBuckets(perPage: 10, page: 1){apiData, bks in print(bks.0.json)   }
 ```
 ###List the authenticated user’s followers
 ```swift
- UserDS.getAuthUserFollowers(perPage: 10, page: 1){ flwrs in print(flwrs.followers?.count)}
+ UserDS.getAuthUserFollowers(perPage: 10, page: 1){ apiData, flwrs in print(flwrs.followers?.count)}
 ```
 ###List who the authenticated user is following
 ```swift
- UserDS.getAuthUserFollowing(perPage: 10, page: 2){ fllwee in print(fllwee.followees?.count)}
+ UserDS.getAuthUserFollowing(perPage: 10, page: 2){ apiData, fllwee in print(fllwee.followees?.count)}
 ```
 ###List shots for users followed by a user
 ```swift
-   UserDS.userFollowingShots(){  shots in print(shots.shots?[0].title) }
+   UserDS.userFollowingShots(){apiData, shots in print(shots.shots?[0].title) }
 ```
 ###Check if AuthUser following a user
 ```swift
- UserDS.checkIfAuthUserFollowingUser("Ramotion"){ status in print(status.isFollowing) }
+ UserDS.checkIfAuthUserFollowingUser("Ramotion"){apiData, status in print(status.isFollowing) }
 ```
 ###Follow a user
 ```swift
-   UserDS.followUser("wearepanic"){ status in print(status.followed) }
+   UserDS.followUser("wearepanic"){apiData, status in print(status.followed) }
 ```
 ###Unfollow a user
 ```swift   
-  UserDS.unfollowUser("Shopify"){ status in print(status.unfollowed) }
+  UserDS.unfollowUser("Shopify"){apiData, status in print(status.unfollowed) }
 ```
 ###List shot likes for user
 ```swift
-  UserDS.getAuthLikes(perPage: 20, page: 1){ likedShots in print(likedShots.likes?[0].shot.title) }
+  UserDS.getAuthLikes(perPage: 20, page: 1){apiData, likedShots in print(likedShots.likes?[0].shot.title) }
 ```
 ###List a user’s projects
 ```swift
-  UserDS.getAuthBuckets(){ api in print(api.buckets?[0].name) }
+  UserDS.getAuthBuckets(){apiData, buckets in print(buckets?[0].name) }
 ```
 ###List shots for a user
 ```swift
-  UserDS.getAuthProjects(perPage: 10, page: 1){ api in print(api.projects?[0].name) }
+  UserDS.getAuthProjects(perPage: 10, page: 1){apiData, projects in print(projects?[0].name) }
 ```
 ###List a user’s teams
 ```swift
-  UserDS.getAuthShots(perPage: 10, page: 3){ api in print(api.shots?[0].title) }
+  UserDS.getAuthShots(perPage: 10, page: 3){apiData, shots in print(shots?[0].title) }
 ```
 
 ##Shots
@@ -294,26 +294,25 @@ ConfigDS.setOAuth2Token("OAUTH2 TOKEN RECEIVED")
 
 ###Like a shot
 ```swift
- ShotsDS.likeShot(shotId: "2678120"){
-            api in
-            print(api.statusCode)
-            print(api.success)
-        }
+    ShotsDS.likeShot(shotId: "2678120"){
+      apiData, returnCode, status in
+      print(returnCode) //
+      print(status)
+    }
 ```
 ###Unlike a shot
 ```swift
-ShotsDS.unlikeShot(shotId: "2678120"){
-            api in
-            print(api.statusCode)
-            print(api.unliked)
-            
-        }
+    ShotsDS.unlikeShot(shotId: "2678120"){
+      apiData, returnCode, status in
+      print(returnCode) //
+      print(status)
+    }
 ```
 ###Checking if user liked a shot
 ```swift
-ShotsDS.checkIfShotLiked(shotId: "2687276"){
-            api in
-            print(api.statusCode)
-            print(api.liked)
-        }
+  ShotsDS.checkIfShotLiked(shotId: "2687276"){
+      apiData, returnCode, status in
+      print(returnCode) //
+      print(status)
+    }
 ```
