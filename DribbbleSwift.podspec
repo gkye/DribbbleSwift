@@ -28,7 +28,6 @@ s.source           = { :git => "https://github.com/gkye/DribbbleSwift.git", :tag
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'Source/**/*'
-  s.watchos.deployment_target = '2.2'
 
 
 end
